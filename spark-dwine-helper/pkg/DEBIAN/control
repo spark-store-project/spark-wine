@@ -1,0 +1,11 @@
+Package: spark-dwine-helper
+Version: 1.0
+Architecture: i386
+Maintainer: shenmo <shenmo@spark-app.store>
+Installed-Size: 2293
+Depends: zenity:amd64, p7zip-full:amd64, fonts-noto-cjk,deepin-wine-helper(>=5.1)
+Section: utils
+Priority: extra
+Multi-Arch: foreign
+Homepage: https://www.spark-app.store/
+Description: Spark Deepin Wine Helper
