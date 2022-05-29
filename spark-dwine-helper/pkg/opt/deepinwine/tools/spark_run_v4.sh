@@ -4,15 +4,7 @@
 #
 #   Author:     Li LongYu <lilongyu@linuxdeepin.com>
 #               Peng Hao <penghao@linuxdeepin.com>
-#
-#   Copyright (C) 2022 The Spark Project
-#   Modifier    shenmo <shenmo@spark-app.store>
-#               sgb76  <sgb76@163.com>
-#
-#   Content modified: line 508: Now will try upgrade any app
-#
-#
-#
+
 WINEPREFIX="$HOME/.deepinwine/@public_bottle_name@"
 APPDIR="/opt/deepinwine/apps/@public_bottle_name@"
 APPVER="@deb_version_string@"
@@ -509,7 +501,7 @@ UpdateApp()
 	fi
 
     case $BOTTLENAME in
-        *)
+        "Deepin-Intelligent" | "Deepin-QQ" | "Deepin-TIM" | "Deepin-WeChat" | "Deepin-WXWork" | "Deepin-Dding")
             rm -rf "$WINEPREFIX"
             DeployApp
             return
