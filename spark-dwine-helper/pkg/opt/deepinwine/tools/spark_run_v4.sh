@@ -7,7 +7,7 @@
 #               Peng Hao <penghao@linuxdeepin.com>
 #
 #   Modifier:   shenmo <shenmo@spark-app.store>
-#		   sgb76 <sgb76@163.com >
+#		   
 #   diff: Now will run set-dwine-scale.sh in stage RunApp before CallApp
 #
 WINEPREFIX="$HOME/.deepinwine/@public_bottle_name@"
