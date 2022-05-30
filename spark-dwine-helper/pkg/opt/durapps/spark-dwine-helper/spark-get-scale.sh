@@ -1,11 +1,6 @@
 #/bin/bash
-##### $1是容器位置
 
-if [ "$1" = "" ];then
-echo "错误：没有输入容器地址。请参考set-dwine5-scale对本脚本的调用"
-exit 
-fi
-
+mkdir -p ~/.config/spark-wine/
 
 
 Get_Dist_Name()
@@ -19,13 +14,13 @@ Get_Dist_Name()
 }
 Get_Dist_Name
 if [ "$DISTRO" = "Deepin" ] || [ "$DISTRO" = "UniontechOS" ];then
-return 1.0
+echo 1.0 > ~/.config/spark-wine/scale.txt
 #####就是1倍缩放
 exit
 fi
 
-if [ -f "$1/scale.txt" ];then
-return `cat $1/scale.txt`
+if [ -f "~/.config/spark-wine/scale.txt" ];then
+echo "设置过了，直接读"
 exit
 fi
 
@@ -40,6 +35,6 @@ zenity --list \
        1.25 \
 	1.5 \
        2.0
-zenity --info --text="已保存！您可以随时删除$1/scale.txt来重新设置"
-echo "$?" > $1/scale.txt
-return $?
+zenity --info --text="已保存！您可以随时删除~/.config/spark-wine/scale.txt来重新设置"
+echo "$?" > ~/.config/spark-wine/scale.txt
+

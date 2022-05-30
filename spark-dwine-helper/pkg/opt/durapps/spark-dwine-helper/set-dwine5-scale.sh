@@ -50,12 +50,16 @@ fi
 
 
 until [ "$env_dwine_scale" != "" ];do
+
 env_dwine_scale=`echo $DEEPIN_WINE_SCALE`
 if [ "$env_dwine_scale" = "" ];then
-echo "E: No DEEPIN_WINE_SCALE found. Use spark-dwine-scale-env-generator to generate"
-echo "错误：没有检测到DEEPIN_WINE_SCALE，用spark-dwine-scale-env-generator生成"
-/opt/durapps/spark-dwine-helper/spark-get-scale.sh $CONTAINER_PATH
-env_dwine_scale=echo "$?"
+echo "E: No DEEPIN_WINE_SCALE found. Use spark-get-scale to Set "
+echo "错误：没有检测到DEEPIN_WINE_SCALE，用spark-get-scale设置"
+/opt/durapps/spark-dwine-helper/spark-get-scale.sh 
+env_dwine_scale=`echo ~/.config/spark-wine/scale.txt`
+echo "检测到的缩放倍数为:$env_dwine_scale"
+echo "Scale is $env_dwine_scale"
+
 else
 echo "检测到的缩放倍数为:$env_dwine_scale"
 echo "Scale is $env_dwine_scale"
