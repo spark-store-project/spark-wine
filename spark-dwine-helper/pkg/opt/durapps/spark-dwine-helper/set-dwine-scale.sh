@@ -72,19 +72,19 @@ done
 
 case "$env_dwine_scale" in
        1.0)
-            reg_text="\"LogPixels\"=dword:00000064"
+            reg_text="\"LogPixels\"=dword:00000060"
             ;;
         1.25)
-            reg_text="\"LogPixels\"=dword:0000007d"
+            reg_text="\"LogPixels\"=dword:00000078"
             ;;
         1.5)
-            reg_text="\"LogPixels\"=dword:00000096"
+            reg_text="\"LogPixels\"=dword:00000090"
             ;;
         2.0)
-            reg_text="\"LogPixels\"=dword:000000C8"
+            reg_text="\"LogPixels\"=dword:000000C0"
             ;;
 	*)
-		reg_text="\"LogPixels\"=dword:00000064"
+		reg_text="\"LogPixels\"=dword:00000060"
 		#可能不是Xorg
 		;;
     esac
