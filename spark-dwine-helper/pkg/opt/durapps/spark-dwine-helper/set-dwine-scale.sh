@@ -152,7 +152,7 @@ case "$env_dwine_scale" in
     esac
 echo "用$APPRUN_CMD执行指令"
 echo "指令为"
-echo "env WINEPREFIX="$CONTAINER_PATH" $APPRUN_CMD reg ADD 'HKCU\Control Panel\Desktop' LogPixels REG_DWORD $dpi"
+echo "env WINEPREFIX="$CONTAINER_PATH" $APPRUN_CMD reg ADD 'HKCU\Control Panel\Desktop' /v LogPixels /t REG_DWORD /d $dpi /f"
 
 env WINEPREFIX="$CONTAINER_PATH" $APPRUN_CMD reg ADD 'HKCU\Control Panel\Desktop' /v LogPixels /t REG_DWORD /d $dpi /f
 
