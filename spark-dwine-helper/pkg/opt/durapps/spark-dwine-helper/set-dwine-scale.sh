@@ -6,14 +6,12 @@ help() {
 -h|--help     显示这个帮助
 path          容器目录
 
-这个脚本不应该用于deepin-wine6
 
 --------------------------------------------------------------------
 Usage: $0 [-h|--help] path
 -h|--help     Show this text
 path          Wine Container directory path
 
-You shouldn't use this script with deepin-wine6
 
 EOF
 }
