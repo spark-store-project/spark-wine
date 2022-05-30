@@ -539,7 +539,7 @@ RunApp()
         DeployApp | progressbar $BOTTLENAME "初始化$BOTTLENAME中..."
  	fi
 #############  WARNING: Here is the modified content: Now will run set-dwine-scale.sh
-	/opt/durapps/spark-dwine-helper/set-dwine-scale.sh
+	/opt/durapps/spark-dwine-helper/set-dwine-scale.sh "$WINEPREFIX"
 
     CallApp "$@"
 }

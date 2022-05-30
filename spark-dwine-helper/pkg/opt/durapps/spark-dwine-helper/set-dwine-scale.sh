@@ -2,15 +2,17 @@
 
 help() {
     cat <<EOF
-用法：$0 [-h|--help]  path
--h|--help     显示这个帮助
-path          容器目录
+用法：$0 [-h|--help] [-s|--set-scale-factor] path
+-h|--help               显示这个帮助
+-s|--set-scale-factor   直接指定缩放。支持1.0，1.25，1.5，2.0	
+path                    容器目录
 
 
 --------------------------------------------------------------------
-Usage: $0 [-h|--help] path
--h|--help     Show this text
-path          Wine Container directory path
+Usage: $0 [-h|--help] [-s|--set-scale-factor] path
+-h|--help               Show this text
+-s|--set-scale-factor   Set scale factor direcly. Support 1.0，1.25，1.5，2.0	
+path                    Wine Container directory path
 
 
 EOF
@@ -24,10 +26,12 @@ parse_args() {
             help
             exit
             ;;
+	-s|--set-scale-factor)
+	scale_factor="$2"
+	;;
         *)
             CONTAINER_PATH="$1"
-		break
-		#没有参数就读完退出
+
             ;;
     esac
     shift
@@ -45,8 +49,8 @@ if [ ! -f "$CONTAINER_PATH/user.reg" ];then
 fi
 
 
-
-
+if [ "$scale_factor" = "" ];then
+#########未指定下
 until [ "$env_dwine_scale" != "" ];do
 
 env_dwine_scale=`echo $DEEPIN_WINE_SCALE`
@@ -66,8 +70,24 @@ fi
 done
 #####非deepin发行版似乎没有这个变量，暂时不清楚这个变量是哪个组件做的
 
+else
+#######指定了缩放倍数
+echo "使用了--set-scale-factor，直接指定"
+echo "--set-scale-factor detected. Arrange directly"
 
 
+if [ "$scale_factor" != "1.0" ] && [ "$scale_factor" != "1.25" ] && [ "$scale_factor" != "1.5" ]  && [ "$scale_factor" != "2.0" ] ;then
+echo "无法识别的倍数：$scale_factor，请参看$0 -h"
+echo "Unrecognizable number. Use $0 -h to get help"
+exit 1
+fi
+#######没问题了再用
+env_dwine_scale=`echo $scale_factor`
+
+
+fi
+
+########开始设置
 case "$env_dwine_scale" in
        1.0)
             reg_text="\"LogPixels\"=dword:00000060"
