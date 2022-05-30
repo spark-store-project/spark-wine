@@ -40,7 +40,6 @@ parse_args() {
 ################
 parse_args "$@"
 
-
 #####先看看PATH对不对
 if [ ! -f "$CONTAINER_PATH/user.reg" ];then
 	echo "错误：找不到user.reg，退出。你应当在文件解压结束后调用此脚本"
@@ -88,6 +87,10 @@ env_dwine_scale=`echo $scale_factor`
 fi
 
 ########开始设置
+########如果环境变量里没指定了APPRUN_CMD（在run.sh中）就替换，如果有就直接用来设置
+
+if [ "$APPRUN_CMD" = "" ];then
+echo "没有检测到APPRUN_CMD环境变量，执行sed替换。如果要使用wine原生提供的方法，请在环境变量中指定(export)"
 case "$env_dwine_scale" in
        1.0)
             reg_text="\"LogPixels\"=dword:00000060"
@@ -126,3 +129,31 @@ echo "在以下行数进行了替换，内容为$reg_text"
 echo `sed -n -e "/"LogPixels"/=" $CONTAINER_PATH/user.reg`
 echo "---------------------------------------"
 
+else
+#####用wine提供的方法
+
+case "$env_dwine_scale" in
+       1.0)
+            dpi="96"
+            ;;
+        1.25)
+            dpi="120"
+            ;;
+        1.5)
+            dpi="144"
+            ;;
+        2.0)
+            dpi="192"
+            ;;
+	*)
+		dpi="96"
+		#可能不是Xorg或者是其他错误
+		;;
+    esac
+echo "用$APPRUN_CMD执行指令"
+echo "指令为"
+echo "env WINEPREFIX="$CONTAINER_PATH" $APPRUN_CMD reg ADD 'HKCU\Control Panel\Desktop' LogPixels REG_DWORD $dpi"
+
+env WINEPREFIX="$CONTAINER_PATH" $APPRUN_CMD reg ADD 'HKCU\Control Panel\Desktop' LogPixels REG_DWORD $dpi
+
+fi
