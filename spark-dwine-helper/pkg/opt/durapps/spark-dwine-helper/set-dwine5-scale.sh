@@ -56,7 +56,7 @@ if [ "$env_dwine_scale" = "" ];then
 echo "E: No DEEPIN_WINE_SCALE found. Use spark-get-scale to Set "
 echo "错误：没有检测到DEEPIN_WINE_SCALE，用spark-get-scale设置"
 /opt/durapps/spark-dwine-helper/spark-get-scale.sh 
-env_dwine_scale=`echo ~/.config/spark-wine/scale.txt`
+env_dwine_scale=`cat ~/.config/spark-wine/scale.txt`
 echo "检测到的缩放倍数为:$env_dwine_scale"
 echo "Scale is $env_dwine_scale"
 
