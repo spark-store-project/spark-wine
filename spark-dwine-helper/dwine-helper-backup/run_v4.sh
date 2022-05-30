@@ -1,16 +1,10 @@
 #!/bin/bash
 
 #   Copyright (C) 2016 Deepin, Inc.
-#   Copyright (C) 2022 The Spark Project
 #
 #   Author:     Li LongYu <lilongyu@linuxdeepin.com>
 #               Peng Hao <penghao@linuxdeepin.com>
-#
-#   Modifier:   shenmo <shenmo@spark-app.store>
-#		   
-#   diff: Now will run set-dwine-scale.sh in stage RunApp before CallApp
-#         Deleted Deepin-* to simplify the script
-#
+
 WINEPREFIX="$HOME/.deepinwine/@public_bottle_name@"
 APPDIR="/opt/deepinwine/apps/@public_bottle_name@"
 APPVER="@deb_version_string@"
@@ -59,13 +53,12 @@ UsePublicDir()
 
     return 0
 }
-########关于公共文件夹，暂时意义不明
 
 _DeleteRegistry()
 {
     env WINEPREFIX="$WINEPREFIX" $WINE_CMD reg DELETE "$1" /f &> /dev/null
 }
-#########功能：删除注册表
+
 init_log_file()
 {
     if [ ! -d "$DEBUG_LOG" ];then
@@ -91,7 +84,7 @@ debug_log()
 {
     echo "${1}"
 }
-################log相关功能
+
 HelpApp()
 {
 	echo " Extra Commands:"
@@ -99,7 +92,7 @@ HelpApp()
 	echo " -e/--remove    Remove deployed app files"
 	echo " -h/--help      Show program help info"
 }
-#############帮助文件
+
 FixLink()
 {
     if [ -d ${WINEPREFIX} ]; then
@@ -113,7 +106,7 @@ FixLink()
         ls -l "${WINEPREFIX}/dosdevices"
     fi
 }
-###########会在应用启动和解压时执行，驱动器绑定
+
 DisableWrite()
 {
     if [ -d "${1}" ]; then
@@ -124,7 +117,7 @@ DisableWrite()
     mkdir "${1}"
     chmod -w "${1}"
 }
-########如果有该文件夹则删除，然后再创建一个不允许写入的（这东西是被用在了QQ启动上，看来腾讯不怎么好对付）
+
 is_autostart()
 {
     AUTOSTART="/opt/deepinwine/tools/autostart"
@@ -139,9 +132,6 @@ is_autostart()
 
     return 1
 }
-#########自动启动相关，等用到了再研究
-urldecode() { : "${*//+/ }"; echo -e "${_//%/\\x}"; }
-#######url转义
 
 #arg 1: windows process file path
 #arg 2-*: windows process args
@@ -178,9 +168,6 @@ CallProcess()
         $SHELL_DIR/autostart_wine.sh $DEB_PACKAGE_NAME
     fi
 }
-###通用启动APP逻辑。对于没有被case捕捉的非适配APP，则直接执行此部分。似乎已经有了防止残留的功能
-###一些自定义的应用不会使用这个启动，而另一些则会调用这个
-###有设置mimetype和自动启动(这个暂时没分析)的功能
 
 CallZhuMu()
 {
@@ -242,9 +229,7 @@ CallTIM()
     if [ ! -f "$WINEPREFIX/../.QQ_run" ]; then
         debug_log "first run time"
         $SHELL_DIR/add_hotkeys
-####似乎是给dde-control-center添加快捷键
         $SHELL_DIR/fontconfig
-####暂时无法得知用途和用法
         # If the bottle not exists, run reg may cost lots of times
         # So create the bottle befor run reg
         env WINEPREFIX="$WINEPREFIX" $WINE_CMD uninstaller --list
@@ -296,19 +281,15 @@ CallDingTalk()
     CallProcess "$@"
 }
 
-
+urldecode() { : "${*//+/ }"; echo -e "${_//%/\\x}"; }
 
 CallMeiTuXiuXiu()
 {
     #set -- "$1" "${2#file://*}"
     local path=$(urldecode "$2")
     path=${path/file:\/\//}
-    set -- "$1" "$path"
-	if [ "$path" ];then 
+    set -- "$1" $path
     CallProcess "$@"
-	else
-	CallProcess "$1"
-	fi
 }
 
 CallFastReadPDF()
@@ -316,25 +297,16 @@ CallFastReadPDF()
     #set -- "$1" "${2#file://*}"
     local path=$(urldecode "$2")
     path=${path/file:\/\//}
-    set -- "$1" "$path"
-	if [ "$path" ];then 
+    set -- "$1" $path
     CallProcess "$@"
-	else
-	CallProcess "$1"
-	fi
 }
 
 CallEvernote()
 {
-    #set -- "$1" "${2#file://*}"
     local path=$(urldecode "$2")
     path=${path/file:\/\//}
-    set -- "$1" "$path"
-	if [ "$path" ];then 
+    set -- "$1" $path
     CallProcess "$@"
-	else
-	CallProcess "$1"
-	fi
 }
 
 CallTencentVideo()
@@ -504,7 +476,6 @@ DeployApp()
     fi
 
 	echo "$APPVER" > "$WINEPREFIX/PACKAGE_VERSION"
-
 }
 RemoveApp()
 {
@@ -561,9 +532,6 @@ RunApp()
  	else
         DeployApp | progressbar $BOTTLENAME "初始化$BOTTLENAME中..."
  	fi
-#############  WARNING: Here is the modified content: Now will run set-dwine-scale.sh
-	/opt/durapps/spark-dwine-helper/set-dwine-scale.sh "$WINEPREFIX"
-
     CallApp "$@"
 }
 
@@ -604,8 +572,6 @@ else
 	}
 fi
 
-
-#####准备启动进程，分析在 https://shenmo7192.gitee.io/post/deepin-wine6%E7%9A%84run_v4%E8%84%9A%E6%9C%AC%E6%8E%A2%E7%B4%A2%E5%90%AF%E5%8A%A8%E6%96%B9%E5%BC%8F/
 if [ $# -lt 3 ]; then
     debug_log "参数个数小于3个"
     exit 0

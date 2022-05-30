@@ -11,6 +11,20 @@
 #   diff: Now will run set-dwine-scale.sh in stage RunApp before CallApp
 #         Deleted Deepin-* to simplify the script
 #
+#
+#
+#	这是一个可以用于自定义的脚本，为了增加易读性，删除了大部分的case
+#	请对照spark_run_v4.sh进行操作
+#	建议把文件名中的custom换成你的app名字（不要中文），方便维护和识别
+#
+#
+#
+#
+#
+#
+#
+#
+
 WINEPREFIX="$HOME/.deepinwine/@public_bottle_name@"
 APPDIR="/opt/deepinwine/apps/@public_bottle_name@"
 APPVER="@deb_version_string@"
@@ -182,234 +196,14 @@ CallProcess()
 ###一些自定义的应用不会使用这个启动，而另一些则会调用这个
 ###有设置mimetype和自动启动(这个暂时没分析)的功能
 
-CallZhuMu()
+
+####请在这里把CustomAPP换成你的APP名字
+####非常不建议直接使用CustomAPP，将来维护你自己都不知道哪个脚本给谁用了
+####不要用中文
+CallCustomAPP()
 {
-    #change current dir to excute path
-    path=$(dirname "$path")
-    cd "$path"
-    pwd
-
-    #Set default mime type
-    if [ -n "$MIME_TYPE" ]; then
-        xdg-mime default "$DEB_PACKAGE_NAME".desktop "$MIME_TYPE"
-    fi
-
-    debug_log_to_file "Starting process $* ..."
-    if [ -n "$2" ];then
-        env WINEPREFIX="$WINEPREFIX" $WINE_CMD "$1" "--url=$2" &
-    else
-        env WINEPREFIX="$WINEPREFIX" $WINE_CMD "$1" &
-    fi
-}
-
-CallQQGame()
-{
-    debug_log "run $1"
-    $SHELL_DIR/kill.sh qqgame block
-    env WINEPREFIX="$WINEPREFIX" $WINE_CMD "$1" &
-}
-
-CallQQ()
-{
-    if [ ! -f "$WINEPREFIX/../.QQ_run" ]; then
-        debug_log "first run time"
-        $SHELL_DIR/add_hotkeys
-        $SHELL_DIR/fontconfig
-        touch "$WINEPREFIX/../.QQ_run"
-    fi
-
-    DisableWrite "${WINEPREFIX}/drive_c/Program Files/Tencent/QQ/Bin/QQLiveMPlayer"
-    DisableWrite "${WINEPREFIX}/drive_c/Program Files/Tencent/QQ/Bin/QQLiveMPlayer1"
-    DisableWrite "${WINEPREFIX}/drive_c/Program Files/Tencent/QzoneMusic"
-
-    DisableWrite "${WINEPREFIX}/drive_c/Program Files/Tencent/QQBrowser"
-    DisableWrite "${WINEPREFIX}/drive_c/Program Files/Common Files/Tencent/QQBrowser"
-    DisableWrite "${WINEPREFIX}/drive_c/users/Public/Application Data/Tencent/QQBrowserBin"
-    DisableWrite "${WINEPREFIX}/drive_c/users/Public/Application Data/Tencent/QQBrowserDefault"
-    DisableWrite "${WINEPREFIX}/drive_c/users/${USER}/Application Data/Tencent/QQBrowserDefault"
-
-    DisableWrite "${WINEPREFIX}/drive_c/users/Public/Application Data/Tencent/QQPCMgr"
-    DisableWrite "${WINEPREFIX}/drive_c/Program Files/Common Files/Tencent/QQPCMgr"
-
-    DisableWrite "${WINEPREFIX}/drive_c/Program Files/Common Files/Tencent/HuaYang"
-    DisableWrite "${WINEPREFIX}/drive_c/users/${USER}/Application Data/Tencent/HuaYang"
-
+###请在这里添加在CallProcess之前的脚本，即在启动应用前执行的。会在部署结束，启动应用前打开
     CallProcess "$@"
-}
-
-CallTIM()
-{
-    if [ ! -f "$WINEPREFIX/../.QQ_run" ]; then
-        debug_log "first run time"
-        $SHELL_DIR/add_hotkeys
-####似乎是给dde-control-center添加快捷键
-        $SHELL_DIR/fontconfig
-####暂时无法得知用途和用法
-        # If the bottle not exists, run reg may cost lots of times
-        # So create the bottle befor run reg
-        env WINEPREFIX="$WINEPREFIX" $WINE_CMD uninstaller --list
-        touch $WINEPREFIX/../.QQ_run
-    fi
-
-    CallProcess "$@"
-
-    #disable Tencent MiniBrowser
-    _DeleteRegistry "HKCU\\Software\\Tencent\\MiniBrowser"
-}
-
-CallWeChat()
-{
-    export DISABLE_RENDER_CLIPBOARD=1
-    CallProcess "$@"
-}
-
-CallWangWang()
-{
-    chmod 700 "$WINEPREFIX/drive_c/Program Files/AliWangWang/9.12.10C/wwbizsrv.exe"
-    chmod 700 "$WINEPREFIX/drive_c/Program Files/Alibaba/wwbizsrv/wwbizsrv.exe"
-    if [ $# = 3 ] && [ -z "$3" ];then
-        EXEC_PATH="c:/Program Files/AliWangWang/9.12.10C/WWCmd.exe"
-        env WINEPREFIX="$WINEPREFIX" $WINE_CMD "$EXEC_PATH" "$2" &
-    else
-    	CallProcess "$@"
-    fi
-}
-
-CallWXWork()
-{
-    if [ -d "${WINEPREFIX}/drive_c/users/${USER}/Application Data/Tencent/WXWork/Update" ]; then
-        rm -rf "${WINEPREFIX}/drive_c/users/${USER}/Application Data/Tencent/WXWork/Update"
-    fi
-    if [ -d "${WINEPREFIX}/drive_c/users/${USER}/Application Data/Tencent/WXWork/upgrade" ]; then
-        rm -rf "${WINEPREFIX}/drive_c/users/${USER}/Application Data/Tencent/WXWork/upgrade"
-    fi
-    #Support use native file dialog
-
-    CallProcess "$@"
-}
-
-CallDingTalk()
-{
-    debug_log "run $1"
-    $SHELL_DIR/kill.sh DingTalk block
-
-    CallProcess "$@"
-}
-
-
-
-CallMeiTuXiuXiu()
-{
-    #set -- "$1" "${2#file://*}"
-    local path=$(urldecode "$2")
-    path=${path/file:\/\//}
-    set -- "$1" "$path"
-	if [ "$path" ];then 
-    CallProcess "$@"
-	else
-	CallProcess "$1"
-	fi
-}
-
-CallFastReadPDF()
-{
-    #set -- "$1" "${2#file://*}"
-    local path=$(urldecode "$2")
-    path=${path/file:\/\//}
-    set -- "$1" "$path"
-	if [ "$path" ];then 
-    CallProcess "$@"
-	else
-	CallProcess "$1"
-	fi
-}
-
-CallEvernote()
-{
-    #set -- "$1" "${2#file://*}"
-    local path=$(urldecode "$2")
-    path=${path/file:\/\//}
-    set -- "$1" "$path"
-	if [ "$path" ];then 
-    CallProcess "$@"
-	else
-	CallProcess "$1"
-	fi
-}
-
-CallTencentVideo()
-{
-    if [ -f "${WINEPREFIX}/drive_c/Program Files/Tencent/QQLive/Upgrade.dll" ]; then
-        rm -rf "${WINEPREFIX}/drive_c/Program Files/Tencent/QQLive/Upgrade.dll"
-    fi
-
-    CallProcess "$@"
-}
-
-CallFoxmail()
-{
-    sed -i '/LogPixels/d' ${WINEPREFIX}/user.reg
-    CallProcess "$@"
-}
-
-CallTHS()
-{
-    $SHELL_DIR/kill.sh ths block
-
-    debug_log "Start run $1"
-    #get file full path
-    path="$1"
-    path=$(echo ${path/c:/${WINEPREFIX}/drive_c})
-    path=$(echo ${path//\\/\/})
-
-    #kill bloack process
-    name="${path##*/}"
-    $SHELL_DIR/kill.sh "$name" block
-
-    #change current dir to excute path
-    path=$(dirname "$path")
-    cd "$path"
-    pwd
-
-    #Set default mime type
-    if [ -n "$MIME_TYPE" ]; then
-        xdg-mime default "$DEB_PACKAGE_NAME".desktop "$MIME_TYPE"
-    fi
-
-    env WINEPREFIX="$WINEPREFIX" $WINE_CMD "$@" &
-}
-
-CallQQGameV2()
-{
-    debug_log "run $1"
-    $SHELL_DIR/kill.sh QQMicroGameBox block
-    env WINEPREFIX="$WINEPREFIX" $WINE_CMD "$1" -action:force_download -appid:${2} -pid:8 -bin_version:1.1.2.4 -loginuin: &
-}
-
-CallPsCs6()
-{
-    #get file full path
-    path="$1"
-    path=$(echo ${path/c:/${WINEPREFIX}/drive_c})
-    path=$(echo ${path//\\/\/})
-
-    #kill bloack process
-    name="${path##*/}"
-    $SHELL_DIR/kill.sh "$name" block
-
-    #change current dir to excute path
-    path=$(dirname "$path")
-    cd "$path"
-    pwd
-
-    #Set default mime type
-    if [ -n "$MIME_TYPE" ]; then
-        xdg-mime default "$DEB_PACKAGE_NAME".desktop "$MIME_TYPE"
-    fi
-
-    debug_log_to_file "Starting process $* ..."
-
-    env WINEPREFIX="$WINEPREFIX" $WINE_CMD "$@" &
 }
 
 #arg 1: exec file path
@@ -421,68 +215,14 @@ CallApp()
     debug_log "CallApp $BOTTLENAME arg count $#: $*"
 
     case $BOTTLENAME in
-        "Deepin-WangWang")
-            CallWangWang "$@"
-            ;;
-        "Deepin-ZhuMu")
-            CallZhuMu "$@"
-            ;;
-        "Deepin-QQ")
-            CallQQ "$@"
-            ;;
-        "Deepin-TIM")
-            CallTIM "$@"
-            ;;
-        "Deepin-QQGame"*)
-            CallQQGame "$@"
-            ;;
-        "Deepin-ATM")
-            CallATM "$@"
-            ;;
-        "Deepin-WeChat")
-            CallWeChat "$@"
-            ;;
-        "Deepin-WXWork")
-            CallWXWork "$@"
-            ;;
-        "Deepin-Dding")
-            CallDingTalk "$@"
-            ;;
-        "Deepin-MTXX")
-            CallMeiTuXiuXiu "$@"
-            ;;
-        "Deepin-FastReadPDF")
-            CallFastReadPDF "$@"
-            ;;
-        "Deepin-Evernote")
-            CallEvernote "$@"
-            ;;
-        "Deepin-TencentVideo")
-            CallTencentVideo "$@"
-            ;;
-        "Deepin-Foxmail")
-            CallFoxmail "$@"
-            ;;
-        "Deepin-THS")
-            CallTHS "$@"
-            ;;
-        "Deepin-QQHlddz")
-            CallQQGameV2 "$1" 363
-            ;;
-        "Deepin-QQBydr")
-            CallQQGameV2 "$1" 1104632801
-            ;;
-        "Deepin-QQMnsj")
-            CallQQGameV2 "$1" 1105856612
-            ;;
-        "Deepin-QQSszb")
-            CallQQGameV2 "$1" 1105640244
-            ;;
-        "Deepin-CS6")
-            CallPsCs6 "$@"
+        "User-Custom")
+	  #^---这里写你的容器名，就是解压到~/.deepinwine的那个文件夹名字
+            CallCustomAPP "$@"
+	      #^---这里要和之前的那个对应
             ;;
         *)
             CallProcess "$@"
+	     #仍然保留对未适配的APP的兼容
             ;;
     esac
 }
@@ -604,12 +344,12 @@ else
 	}
 fi
 
-
-#####准备启动进程，分析在 https://shenmo7192.gitee.io/post/deepin-wine6%E7%9A%84run_v4%E8%84%9A%E6%9C%AC%E6%8E%A2%E7%B4%A2%E5%90%AF%E5%8A%A8%E6%96%B9%E5%BC%8F/
 if [ $# -lt 3 ]; then
     debug_log "参数个数小于3个"
     exit 0
 fi
+
+#####准备启动进程，分析在 https://shenmo7192.gitee.io/post/deepin-wine6%E7%9A%84run_v4%E8%84%9A%E6%9C%AC%E6%8E%A2%E7%B4%A2%E5%90%AF%E5%8A%A8%E6%96%B9%E5%BC%8F/
 
 BOTTLENAME="$1"
 WINEPREFIX="$HOME/.deepinwine/$1"
