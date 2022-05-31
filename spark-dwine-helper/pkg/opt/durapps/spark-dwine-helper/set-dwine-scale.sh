@@ -4,14 +4,14 @@ help() {
     cat <<EOF
 用法：$0 [-h|--help] [-s|--set-scale-factor] path
 -h|--help               显示这个帮助
--s|--set-scale-factor   直接指定缩放。支持1.0，1.25，1.5，2.0	
+-s|--set-scale-factor   直接指定缩放。支持1.0，1.25，1.5，1.75，2.0	
 path                    容器目录
 
 
 --------------------------------------------------------------------
 Usage: $0 [-h|--help] [-s|--set-scale-factor] path
 -h|--help               Show this text
--s|--set-scale-factor   Set scale factor direcly. Support 1.0，1.25，1.5，2.0	
+-s|--set-scale-factor   Set scale factor direcly. Support 1.0，1.25，1.5，1.75，2.0	
 path                    Wine Container directory path
 
 
@@ -27,7 +27,8 @@ parse_args() {
             exit
             ;;
 	-s|--set-scale-factor)
-	scale_factor="$2"
+	appointed_scale_factor="$2"
+    
 	;;
         *)
             CONTAINER_PATH="$1"
@@ -48,26 +49,36 @@ if [ ! -f "$CONTAINER_PATH/user.reg" ];then
 fi
 
 
-if [ "$scale_factor" = "" ];then
-#########未指定下
-until [ "$env_dwine_scale" != "" ];do
+if [ "$appointed_scale_factor" = "" ];then
+#########未指定下，读取$CONTAINER_PATH/scale.txt。如果没有，优先$DEEPIN_WINE_SCALE设置，然后是手动
 
-env_dwine_scale=`echo $DEEPIN_WINE_SCALE`
-if [ "$env_dwine_scale" = "" ];then
-echo "E: No DEEPIN_WINE_SCALE found. Use spark-get-scale to Set "
-echo "错误：没有检测到DEEPIN_WINE_SCALE，用spark-get-scale设置"
-/opt/durapps/spark-dwine-helper/spark-get-scale.sh 
-env_dwine_scale=`cat ~/.config/spark-wine/scale.txt`
-echo "检测到的缩放倍数为:$env_dwine_scale"
-echo "Scale is $env_dwine_scale"
-
+if [ !-f "$CONTAINER_PATH/scale.txt" ];then
+	
+	echo "E: No SCALE profile found. try to use DEEPIN_WINE_SCALE"
+	echo "错误：没有检测到缩放设置，读取DEEPIN_WINE_SCALE"
+	if [ "$DEEPIN_WINE_SCALE" = "" ];then
+		echo "E: No DEEPIN_WINE_SCALE found. Use spark-get-scale to Set "
+		echo "错误：没有检测到DEEPIN_WINE_SCALE，用spark-get-scale设置"
+		/opt/durapps/spark-dwine-helper/spark-get-scale.sh "$CONTAINER_PATH"
+		wine_scale=`cat $CONTAINER_PATH/scale.txt`
+		echo "检测到的缩放倍数为:$wine_scale"
+		echo "Scale is $wine_scale"
+	else
+		echo "$DEEPIN_WINE_SCALE" > $CONTAINER_PATH/scale.txt
+		wine_scale=`cat $CONTAINER_PATH/scale.txt`
+		echo "检测到的缩放倍数为:$wine_scale"
+		echo "Scale is $wine_scale"
+fi
 else
-echo "检测到的缩放倍数为:$env_dwine_scale"
-echo "Scale is $env_dwine_scale"
+wine_scale=`cat $CONTAINER_PATH/scale.txt`
+echo "检测到的缩放倍数为:$wine_scale"
+echo "Scale is $wine_scale"
 fi
 
-done
+
 #####非deepin发行版似乎没有这个变量，暂时不清楚这个变量是哪个组件做的
+
+
 
 else
 #######指定了缩放倍数
@@ -75,13 +86,13 @@ echo "使用了--set-scale-factor，直接指定"
 echo "--set-scale-factor detected. Arrange directly"
 
 
-if [ "$scale_factor" != "1.0" ] && [ "$scale_factor" != "1.25" ] && [ "$scale_factor" != "1.5" ]  && [ "$scale_factor" != "2.0" ] ;then
-echo "无法识别的倍数：$scale_factor，请参看$0 -h"
+if [ "$appointed_scale_factor" != "1.0" ] && [ "$appointed_scale_factor" != "1.25" ] && [ "$appointed_scale_factor" != "1.5" ]  && [ "$appointed_scale_factor" != "1.75" ] && [ "$appointed_scale_factor" != "2.0" ] ;then
+echo "无法识别的倍数：$appointed_scale_factor，请参看$0 -h"
 echo "Unrecognizable number. Use $0 -h to get help"
 exit 1
 fi
 #######没问题了再用
-env_dwine_scale=`echo $scale_factor`
+wine_scale=`echo $appointed_scale_factor`
 
 
 fi
@@ -91,7 +102,7 @@ fi
 
 if [ "$APPRUN_CMD" = "" ];then
 echo "没有检测到APPRUN_CMD环境变量，执行sed替换。如果要使用wine原生提供的方法，请在环境变量中指定(export)"
-case "$env_dwine_scale" in
+case "$wine_scale" in
        1.0)
             reg_text="\"LogPixels\"=dword:00000060"
             ;;
@@ -100,6 +111,9 @@ case "$env_dwine_scale" in
             ;;
         1.5)
             reg_text="\"LogPixels\"=dword:00000090"
+            ;;
+        1.75)
+            reg_text="\"LogPixels\"=dword:000000A8"
             ;;
         2.0)
             reg_text="\"LogPixels\"=dword:000000C0"
@@ -132,7 +146,7 @@ echo "---------------------------------------"
 else
 #####用wine提供的方法
 
-case "$env_dwine_scale" in
+case "$wine_scale" in
        1.0)
             dpi="96"
             ;;
@@ -141,6 +155,9 @@ case "$env_dwine_scale" in
             ;;
         1.5)
             dpi="144"
+            ;;
+        1.75)
+            dpi="168"
             ;;
         2.0)
             dpi="192"
