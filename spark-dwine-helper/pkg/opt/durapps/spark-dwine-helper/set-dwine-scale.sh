@@ -92,8 +92,8 @@ echo "Unrecognizable number. Use $0 -h to get help"
 exit 1
 fi
 #######没问题了再用
-wine_scale=`echo $appointed_scale_factor`
-
+echo "$appointed_scale_factor" > $CONTAINER_PATH/scale.txt
+wine_scale=`cat $CONTAINER_PATH/scale.txt`
 
 fi
 
