@@ -52,7 +52,7 @@ fi
 if [ "$appointed_scale_factor" = "" ];then
 #########未指定下，读取$CONTAINER_PATH/scale.txt。如果没有，优先$DEEPIN_WINE_SCALE设置，然后是手动
 
-if [ !-f "$CONTAINER_PATH/scale.txt" ];then
+if [ ! -f "$CONTAINER_PATH/scale.txt" ];then
 	
 	echo "E: No SCALE profile found. try to use DEEPIN_WINE_SCALE"
 	echo "错误：没有检测到缩放设置，读取DEEPIN_WINE_SCALE"
@@ -71,11 +71,14 @@ if [ !-f "$CONTAINER_PATH/scale.txt" ];then
 fi
 else
 wine_scale=`cat $CONTAINER_PATH/scale.txt`
+if [ -n "$DEEPIN_WINE_SCALE" ] && [ "$DEEPIN_WINE_SCALE" != "$wine_scale" ];then
+zenity --info --text="检测到您的缩放设置和Deepin默认的不同。这可能是您的个人设置，因此不会自动同步\n您可以删除$CONTAINER_PATH/scale.txt来同步设置" --width=500 --height=150 --timeout=5 &
+fi
 echo "检测到的缩放倍数为:$wine_scale"
 echo "Scale is $wine_scale"
+
+
 fi
-
-
 #####非deepin发行版似乎没有这个变量，暂时不清楚这个变量是哪个组件做的
 
 

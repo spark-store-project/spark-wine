@@ -8,7 +8,7 @@
 #
 #   Modifier:   shenmo <shenmo@spark-app.store>
 #		   
-#   diff: Now will run set-dwine-scale.sh in stage RunApp before CallApp
+#   diff: Now will run set-dwine-scale.sh in stage CallProcess before CallApp
 #         Deleted Deepin-* to simplify the script
 #
 WINEPREFIX="$HOME/.deepinwine/@public_bottle_name@"
@@ -171,7 +171,8 @@ CallProcess()
     fi
 
     debug_log_to_file "Starting process $* ..."
-
+	#############  WARNING: Here is the modified content: Now will run set-dwine-scale.sh
+	/opt/durapps/spark-dwine-helper/set-dwine-scale.sh "$WINEPREFIX"
     env WINEPREFIX="$WINEPREFIX" $WINE_CMD "$@" &
 
     #start autobottle
@@ -377,14 +378,14 @@ CallTHS()
         xdg-mime default "$DEB_PACKAGE_NAME".desktop "$MIME_TYPE"
     fi
 
-    env WINEPREFIX="$WINEPREFIX" $WINE_CMD "$@" &
+    CallProcess "$@"
 }
 
 CallQQGameV2()
 {
     debug_log "run $1"
     $SHELL_DIR/kill.sh QQMicroGameBox block
-    env WINEPREFIX="$WINEPREFIX" $WINE_CMD "$1" -action:force_download -appid:${2} -pid:8 -bin_version:1.1.2.4 -loginuin: &
+    CallProcess "$1" -action:force_download -appid:${2} -pid:8 -bin_version:1.1.2.4 -loginuin: 
 }
 
 CallPsCs6()
@@ -410,7 +411,7 @@ CallPsCs6()
 
     debug_log_to_file "Starting process $* ..."
 
-    env WINEPREFIX="$WINEPREFIX" $WINE_CMD "$@" &
+    CallProcess "$@"
 }
 
 #arg 1: exec file path
@@ -562,8 +563,6 @@ RunApp()
  	else
         DeployApp | progressbar $BOTTLENAME "初始化$BOTTLENAME中..."
  	fi
-#############  WARNING: Here is the modified content: Now will run set-dwine-scale.sh
-	/opt/durapps/spark-dwine-helper/set-dwine-scale.sh "$WINEPREFIX"
 
     CallApp "$@"
 }
