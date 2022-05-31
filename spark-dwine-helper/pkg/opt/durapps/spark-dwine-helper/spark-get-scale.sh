@@ -9,9 +9,11 @@ Get_Dist_Name()
         DISTRO='Deepin'
     elif grep -Eqi "Uniontech" /etc/issue || grep -Eq "Uniontech" /etc/*-release; then
         DISTRO='UniontechOS'
-
+    else
+	 DISTRO='OtherOS'
 	fi
 }
+
 Get_Dist_Name
 if [ "$DISTRO" = "Deepin" ] || [ "$DISTRO" = "UniontechOS" ];then
 echo 1.0 > ~/.config/spark-wine/scale.txt

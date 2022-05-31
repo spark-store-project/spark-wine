@@ -17,6 +17,7 @@ APPVER="@deb_version_string@"
 APPTAR="files.7z"
 BOTTLENAME=""
 WINE_CMD="deepin-wine"
+#这里会被后续覆盖，似乎没啥用
 LOG_FILE=$0
 PUBLIC_DIR="/var/public"
 
@@ -427,7 +428,7 @@ CallApp()
         "Deepin-ZhuMu")
             CallZhuMu "$@"
             ;;
-        "Deepin-QQ"|"Wine-QQ")
+        "Deepin-QQ"|"Wine-QQ"|"Spark-QQ")
             CallQQ "$@"
             ;;
         "Deepin-TIM")
