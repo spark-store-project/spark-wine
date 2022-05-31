@@ -12,12 +12,12 @@ Get_Dist_Name()
 
 	fi
 }
-#Get_Dist_Name
-#if [ "$DISTRO" = "Deepin" ] || [ "$DISTRO" = "UniontechOS" ];then
-#echo 1.0 > ~/.config/spark-wine/scale.txt
+Get_Dist_Name
+if [ "$DISTRO" = "Deepin" ] || [ "$DISTRO" = "UniontechOS" ];then
+echo 1.0 > ~/.config/spark-wine/scale.txt
 #####就是1倍缩放
-#exit
-#fi
+exit
+fi
 
 real_path_of_the_fucking_scale_txt=`echo ~/.config/spark-wine/scale.txt`
 if [ -f "$real_path_of_the_fucking_scale_txt" ];then
