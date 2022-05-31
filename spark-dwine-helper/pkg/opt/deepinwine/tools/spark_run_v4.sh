@@ -427,7 +427,7 @@ CallApp()
         "Deepin-ZhuMu")
             CallZhuMu "$@"
             ;;
-        "Deepin-QQ")
+        "Deepin-QQ"|"Wine-QQ")
             CallQQ "$@"
             ;;
         "Deepin-TIM")
