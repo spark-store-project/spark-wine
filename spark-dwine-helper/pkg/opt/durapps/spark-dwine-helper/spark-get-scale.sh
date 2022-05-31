@@ -19,8 +19,8 @@ echo 1.0 > ~/.config/spark-wine/scale.txt
 exit
 fi
 
-real_path=echo ~/.config/spark-wine/scale.txt
-if [ -f "$real_path" ];then
+real_path_of_the_fucking_scale_txt=echo ~/.config/spark-wine/scale.txt
+if [ -f "$real_path_of_the_fucking_scale_txt" ];then
 echo "设置过了，直接读"
 exit
 fi
