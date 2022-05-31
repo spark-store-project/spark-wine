@@ -14,6 +14,21 @@
 #
 #
 
+#######################函数段。下文调用的额外功能会在此处声明
+
+Get_Dist_Name()
+{
+    if grep -Eqii "Deepin" /etc/issue || grep -Eq "Deepin" /etc/*-release; then
+        DISTRO='Deepin'
+    elif grep -Eqi "Uniontech" /etc/issue || grep -Eq "Uniontech" /etc/*-release; then
+        DISTRO='UniontechOS'
+    else
+	 DISTRO='OtherOS'
+	fi
+}
+
+####获得发行版名称
+
 #########################预设值段
 
 version_gt() { test "$(echo "$@" | tr " " "\n" | sort -V | head -n 1)" != "$1"; }
@@ -79,17 +94,3 @@ else
 fi
 
 
-#######################函数段。上文调用的额外功能会在此处声明
-
-Get_Dist_Name()
-{
-    if grep -Eqii "Deepin" /etc/issue || grep -Eq "Deepin" /etc/*-release; then
-        DISTRO='Deepin'
-    elif grep -Eqi "Uniontech" /etc/issue || grep -Eq "Uniontech" /etc/*-release; then
-        DISTRO='UniontechOS'
-    else
-	 DISTRO='OtherOS'
-	fi
-}
-
-####获得发行版名称

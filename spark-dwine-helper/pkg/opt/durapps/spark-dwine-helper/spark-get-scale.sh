@@ -1,4 +1,16 @@
 #/bin/bash
+#########>>>>>>>函数段
+Get_Dist_Name()
+{
+    if grep -Eqii "Deepin" /etc/issue || grep -Eq "Deepin" /etc/*-release; then
+        DISTRO='Deepin'
+    elif grep -Eqi "Uniontech" /etc/issue || grep -Eq "Uniontech" /etc/*-release; then
+        DISTRO='UniontechOS'
+    else
+	 DISTRO='OtherOS'
+	fi
+}
+#########<<<<<<<
 
 if [ $# -lt 1 ]; then
 echo "无参数，无法启动。请参考set-dwine-scale.sh使用"
@@ -54,14 +66,3 @@ esac
 echo "$scale_factor" > $HOME/.config/spark-wine/scale.txt
 cat $HOME/.config/spark-wine/scale.txt > $CONTAINER_PATH/scale.txt
 
-#########>>>>>>>函数段
-Get_Dist_Name()
-{
-    if grep -Eqii "Deepin" /etc/issue || grep -Eq "Deepin" /etc/*-release; then
-        DISTRO='Deepin'
-    elif grep -Eqi "Uniontech" /etc/issue || grep -Eq "Uniontech" /etc/*-release; then
-        DISTRO='UniontechOS'
-    else
-	 DISTRO='OtherOS'
-	fi
-}
