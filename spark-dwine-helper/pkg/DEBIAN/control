@@ -7,5 +7,5 @@ Depends: zenity:amd64, p7zip-full:amd64, fonts-noto-cjk,deepin-wine-helper(>=5.1
 Section: utils
 Priority: extra
 Multi-Arch: foreign
-Homepage: https://www.spark-app.store/
+Homepage: https://gitee.com/deepin-community-store/spark-wine
 Description: Spark Deepin Wine Helper
