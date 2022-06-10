@@ -25,7 +25,7 @@ mkdir -p $HOME/.config/spark-wine/
 #####能到这一步的说明已经是没有自定义参数了，直接读全局覆盖没问题
 #####
 
-if [ !-f "$HOME/.config/spark-wine/scale.txt" ];then
+if [ -f "$HOME/.config/spark-wine/scale.txt" ];then
 	cat $HOME/.config/spark-wine/scale.txt > $CONTAINER_PATH/scale.txt
 	echo "检测到已经设置过全局参数，直接复制"
 	exit
