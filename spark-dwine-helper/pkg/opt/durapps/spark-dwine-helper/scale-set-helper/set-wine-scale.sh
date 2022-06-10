@@ -57,9 +57,9 @@ if [ ! -f "$CONTAINER_PATH/scale.txt" ];then
 	echo "E: No SCALE profile found. try to use DEEPIN_WINE_SCALE"
 	echo "错误：没有检测到缩放设置，读取DEEPIN_WINE_SCALE"
 	if [ "$DEEPIN_WINE_SCALE" = "" ];then
-		echo "E: No DEEPIN_WINE_SCALE found. Use spark-get-scale to Set "
-		echo "错误：没有检测到DEEPIN_WINE_SCALE，用spark-get-scale设置"
-		/opt/durapps/spark-dwine-helper/spark-get-scale.sh "$CONTAINER_PATH"
+		echo "E: No DEEPIN_WINE_SCALE found. Use get-scale.sh to Set "
+		echo "错误：没有检测到DEEPIN_WINE_SCALE，用get-scale.sh设置"
+		/opt/durapps/spark-dwine-helper/scale-set-helper/get-scale.sh "$CONTAINER_PATH"
 		wine_scale=`cat $CONTAINER_PATH/scale.txt`
 		echo "检测到的缩放倍数为:$wine_scale"
 		echo "Scale is $wine_scale"

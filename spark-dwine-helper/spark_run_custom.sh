@@ -8,8 +8,7 @@
 #
 #   Modifier:   shenmo <shenmo@spark-app.store>
 #		   
-#   diff: Now will run set-dwine-scale.sh in stage RunApp before CallApp
-#         Deleted Deepin-* to simplify the script
+
 #
 #
 #
@@ -270,8 +269,8 @@ RunApp()
  	else
         DeployApp | progressbar $BOTTLENAME "初始化$BOTTLENAME中..."
  	fi
-#############  WARNING: Here is the modified content: Now will run set-dwine-scale.sh
-	/opt/durapps/spark-dwine-helper/set-dwine-scale.sh "$WINEPREFIX"
+#############  WARNING: Here is the modified content: Now will run set-wine-scale.sh
+	/opt/durapps/spark-dwine-helper/scale-set-helper/set-wine-scale.sh "$WINEPREFIX" "$WINEPREFIX"
 
     CallApp "$@"
 }
