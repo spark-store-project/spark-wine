@@ -28,6 +28,7 @@ mkdir -p $HOME/.config/spark-wine/
 if [ -f "$HOME/.config/spark-wine/scale.txt" ];then
 	cat $HOME/.config/spark-wine/scale.txt > $CONTAINER_PATH/scale.txt
 	echo "检测到已经设置过全局参数，直接复制"
+    echo "全局参数的位置在$HOME/.config/spark-wine/scale.txt，如果需要更换请删除此文件重新生成"
 	exit
 fi
 
