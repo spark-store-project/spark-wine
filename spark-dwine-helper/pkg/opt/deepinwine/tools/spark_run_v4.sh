@@ -501,7 +501,7 @@ UpdateApp()
 	fi
 
     case $BOTTLENAME in
-        "Deepin-Intelligent" | "Deepin-QQ" | "Deepin-TIM" | "Deepin-WeChat" | "Deepin-WXWork" | "Deepin-Dding")
+        "Deepin-Intelligent" | "Deepin-QQ" | "Deepin-TIM" | "Deepin-WeChat" | "Deepin-WXWork" | "Deepin-Dding" | "Wine-QQ" | "Spark-QQ")
             rm -rf "$WINEPREFIX"
             DeployApp
             return
