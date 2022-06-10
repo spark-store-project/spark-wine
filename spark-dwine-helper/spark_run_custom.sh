@@ -48,32 +48,7 @@ if [ $SPECIFY_SHELL_DIR ]; then
     SHELL_DIR=$SPECIFY_SHELL_DIR
 fi
 
-UsePublicDir()
-{
-    if [ -z "$USE_PUBLIC_DIR" ]; then
-        echo "Don't use public dir"
-        return 1
-    fi
-    if [ ! -d "$PUBLIC_DIR" ];then
-        echo "Not found $PUBLIC_DIR"
-        return 1
-    fi
-    if [ ! -r "$PUBLIC_DIR" ];then
-        echo "Can't read for $PUBLIC_DIR"
-        return 1
-    fi
-    if [ ! -w "$PUBLIC_DIR" ];then
-        echo "Can't write for $PUBLIC_DIR"
-        return 1
-    fi
-    if [ ! -x "$PUBLIC_DIR" ];then
-        echo "Can't excute for $PUBLIC_DIR"
-        return 1
-    fi
 
-    return 0
-}
-########关于公共文件夹，暂时意义不明
 
 _DeleteRegistry()
 {
@@ -238,10 +213,7 @@ DeployApp()
 {
 	ExtractApp "$WINEPREFIX"
 
-    if UsePublicDir;then
-        chgrp -R users "$WINEPREFIX"
-        chmod -R 0775 "$WINEPREFIX"
-    fi
+
 
 	echo "$APPVER" > "$WINEPREFIX/PACKAGE_VERSION"
 
@@ -280,10 +252,7 @@ UpdateApp()
 	ExtractApp "${WINEPREFIX}.tmpdir"
 	$SHELL_DIR/updater -s "${WINEPREFIX}.tmpdir" -c "${WINEPREFIX}" -v
 
-    if UsePublicDir;then
-        chgrp -R users "$WINEPREFIX"
-        chmod -R 0775 "$WINEPREFIX"
-    fi
+ 
 
 	rm -rf "${WINEPREFIX}.tmpdir"
 	echo "$APPVER" > "$WINEPREFIX/PACKAGE_VERSION"
@@ -354,9 +323,7 @@ fi
 BOTTLENAME="$1"
 WINEPREFIX="$HOME/.deepinwine/$1"
 
-if UsePublicDir;then
-    WINEPREFIX="$PUBLIC_DIR/$1"
-fi
+
 
 APPDIR="/opt/apps/${DEB_PACKAGE_NAME}/files"
 if [ -f "$APPDIR/files.md5sum" ];then
