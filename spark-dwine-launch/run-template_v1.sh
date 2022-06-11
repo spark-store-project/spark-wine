@@ -20,7 +20,7 @@ Get_Dist_Name()
 {
     if grep -Eqii "Deepin" /etc/issue || grep -Eq "Deepin" /etc/*-release; then
         DISTRO='Deepin'
-    elif grep -Eqi "Uniontech" /etc/issue || grep -Eq "Uniontech" /etc/*-release; then
+    elif grep -Eqi "UnionTech" /etc/issue || grep -Eq "UnionTech" /etc/*-release; then
         DISTRO='UniontechOS'
     else
 	 DISTRO='OtherOS'
