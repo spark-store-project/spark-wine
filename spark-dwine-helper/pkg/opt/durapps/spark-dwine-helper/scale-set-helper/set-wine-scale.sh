@@ -7,14 +7,14 @@ help() {
 -s|--set-scale-factor   直接指定缩放。支持1.0，1.25，1.5，1.75，2.0	
 path                    容器目录
 
-
+                                         本 $0 具有超级兔力。
 --------------------------------------------------------------------
 Usage: $0 [-h|--help] [-s|--set-scale-factor] path
 -h|--help               Show this text
 -s|--set-scale-factor   Set scale factor direcly. Support 1.0，1.25，1.5，1.75，2.0	
 path                    Wine Container directory path
 
-
+                                         This $0 have super bunny power.
 EOF
 }
 #########################帮助文件结束#############################
@@ -30,6 +30,13 @@ parse_args() {
 	appointed_scale_factor="$2"
     
 	;;
+
+	"bunny")
+		cat /opt/durapps/spark-dwine-helper/bunny.txt
+	exit
+
+	;;
+
         *)
             CONTAINER_PATH="$1"
 
@@ -43,8 +50,10 @@ parse_args "$@"
 
 #####先看看PATH对不对
 if [ ! -f "$CONTAINER_PATH/user.reg" ];then
-	echo "错误：找不到user.reg，退出。你应当在文件解压结束后调用此脚本"
+	echo "错误：找不到user.reg，退出。你应当在文件解压结束后调用此脚本。"
+	echo "如果你不清楚如何使用这个脚本，请使用 $0 -h"
     echo "E: Can not find user.reg. Exit. You should use this script after the extraction"
+	echo "If you don't know how to use this script, try $0 -h"
 	exit 1
 fi
 

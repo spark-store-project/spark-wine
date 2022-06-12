@@ -13,12 +13,20 @@ Get_Dist_Name()
 #########<<<<<<<
 
 if [ $# -lt 1 ]; then
-echo "无参数，无法启动。请参考set-dwine-scale.sh使用"
+echo "无参数，无法启动。这是一个set-wine-scale的组件，一般来说，你不会需要单独启动这个脚本"
+echo "请参考set-wine-scale.sh使用"
 echo "参数为CONTAINER_PATH"
 echo "只读取第一个，其他参数会被放弃"
 fi
 
 CONTAINER_PATH="$1"
+
+if [ ! -f "$CONTAINER_PATH/user.reg" ];then
+	echo "错误：找不到user.reg，退出。你应当在文件解压结束后调用此脚本"
+    echo "E: Can not find user.reg. Exit. You should use this script after the extraction"
+	exit 1
+fi
+
 
 mkdir -p $HOME/.config/spark-wine/
 #####全局参数位置
