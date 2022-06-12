@@ -32,7 +32,7 @@ parse_args() {
 	;;
 
 	"bunny")
-		cat /opt/durapps/spark-dwine-helper/bunny.txt
+		cat /opt/durapps/spark-dwine-helper/scale-set-helper/bunny.txt
 	exit
 
 	;;
