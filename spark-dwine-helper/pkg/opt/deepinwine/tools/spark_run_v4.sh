@@ -212,6 +212,23 @@ CallQQ()
     CallProcess "$@"
 }
 
+CallTiktokCN()
+{
+    if [ ! -f "$WINEPREFIX/../.TiktokCN_run" ]; then
+        debug_log "first run time"
+        $SHELL_DIR/add_hotkeys
+        $SHELL_DIR/fontconfig
+        touch "$WINEPREFIX/../.TiktokCN_run"
+    fi
+
+    chmod 555 /home/${USER}/.deepinwine/Spark-tiktokCN/drive_c/users/${USER}/Application\ Data/douyin
+    chmod 555 /home/${USER}/.deepinwine/Spark-tiktokCN/drive_c/users/@surrent_user@/Application\ Data/douyin
+    chmod 555 /home/${USER}/.deepinwine/Spark-tiktokCN.tmpdir/drive_c/users/${USER}/Application\ Data/douyin
+    chmod 555 /home/${USER}/.deepinwine/Spark-tiktokCN.tmpdir/drive_c/users/@surrent_user@/Application\ Data/douyin
+
+    CallProcess "$@"
+}
+
 CallTIM()
 {
     if [ ! -f "$WINEPREFIX/../.QQ_run" ]; then
@@ -399,6 +416,9 @@ CallApp()
         "Deepin-WangWang")
             CallWangWang "$@"
             ;;
+        "Spark-tiktokCN")
+            CallTiktokCN "$@"
+            ;;
         "Deepin-ZhuMu")
             CallZhuMu "$@"
             ;;
@@ -501,7 +521,7 @@ UpdateApp()
 	fi
 
     case $BOTTLENAME in
-        "Deepin-Intelligent" | "Deepin-QQ" | "Deepin-TIM" | "Deepin-WeChat" | "Deepin-WXWork" | "Deepin-Dding" | "Wine-QQ" | "Spark-QQ")
+        "Deepin-Intelligent" | "Deepin-QQ" | "Deepin-TIM" | "Deepin-WeChat" | "Deepin-WXWork" | "Deepin-Dding" | "Wine-QQ" | "Spark-QQ" | "Spark-weixin")
             rm -rf "$WINEPREFIX"
             DeployApp
             return
