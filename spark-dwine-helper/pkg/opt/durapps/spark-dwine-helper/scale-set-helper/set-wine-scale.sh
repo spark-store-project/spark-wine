@@ -7,14 +7,14 @@ help() {
 -s|--set-scale-factor   直接指定缩放。支持1.0，1.25，1.5，1.75，2.0	
 path                    容器目录
 
-                                         本 $0 具有超级兔力。
+                                         本脚本具有超级兔力。
 --------------------------------------------------------------------
 Usage: $0 [-h|--help] [-s|--set-scale-factor] path
 -h|--help               Show this text
 -s|--set-scale-factor   Set scale factor direcly. Support 1.0，1.25，1.5，1.75，2.0	
 path                    Wine Container directory path
 
-                                         This $0 have super bunny power.
+                                         This script have super bunny power.
 EOF
 }
 #########################帮助文件结束#############################
