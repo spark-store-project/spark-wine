@@ -7,4 +7,4 @@ if [ -L /opt/deepinwine/tools/spark_run_v4.sh ];then
 rm -f /opt/deepinwine/tools/spark_run_v4.sh
 fi
 
-echo "清理垃圾"
+echo "清理"

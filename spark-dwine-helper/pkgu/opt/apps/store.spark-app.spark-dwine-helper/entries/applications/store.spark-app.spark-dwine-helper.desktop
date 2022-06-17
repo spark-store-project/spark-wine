@@ -1,0 +1,12 @@
+[Desktop Entry]
+Categories=Utility;
+Encoding=UTF-8
+Exec=zenity --info --text="请前往 /opt/durapps/spark-dwine-helper/ 查看" --width=500 --height=150
+Icon=store.spark-app.spark-dwine-helper
+MimeType=
+Name=store.spark-app.spark-dwine-helper
+StartupWMClass=spark-webapp-runtime
+Terminal=False
+Type=Application
+NoDisplay=true
+X-Deepin-Vendor=user-custom
