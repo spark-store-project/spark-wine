@@ -1,0 +1,17 @@
+{
+    "appid": "store.spark-app.spark-dwine-helper",
+    "name": "store.spark-app.spark-dwine-helper",
+    "version": "1.6.3",
+    "arch": ["amd64,arm64,mipsel64,sw64"],
+    "permissions": {
+        "autostart": false,
+        "notification": false,
+        "trayicon": false,
+        "clipboard": false,
+        "account": false,
+        "bluetooth": false,
+        "camera": false,
+        "audio_record": false,
+        "installed_apps": false
+    }
+}
