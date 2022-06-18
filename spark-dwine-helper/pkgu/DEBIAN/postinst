@@ -1,5 +1,0 @@
-#!/bin/bash
-mkdir -p /opt/durapps/spark-dwine-helper/
-ln -s -f /opt/apps/store.spark-app.spark-dwine-helper/files/durapps/spark-dwine-helper/scale-set-helper /opt/durapps/spark-dwine-helper/
-ln -s -f /opt/apps/store.spark-app.spark-dwine-helper/files/deepinwine/tools/spark_run_v4.sh /opt/deepinwine/tools/spark_run_v4.sh
-echo "释放文件"
