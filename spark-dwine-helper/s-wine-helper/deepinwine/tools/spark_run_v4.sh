@@ -157,6 +157,16 @@ CallProcess()
 ###一些自定义的应用不会使用这个启动，而另一些则会调用这个
 ###有设置mimetype和自动启动(这个暂时没分析)的功能
 
+###########专属优化段：
+CallFlyele() 
+{
+    if [ -w ${WINEPREFIX}/drive_c/users/${USER}/Application\ Data/飞项/Crashpad/reports ]; then
+       rm -rf ${WINEPREFIX}/drive_c/users/${USER}/Application\ Data/飞项/Crashpad/reports/*
+       chmod 555 ${WINEPREFIX}/drive_c/users/${USER}/Application\ Data/飞项/Crashpad/reports
+    fi
+    CallProcess "$@"
+}
+
 CallZhuMu()
 {
     #change current dir to excute path
@@ -404,9 +414,14 @@ CallPsCs6()
     CallProcess "$@"
 }
 
+#####专属优化段结束
+
 #arg 1: exec file path
 #arg 2: autostart ,or exec arg 1
 #arg 3: exec arg 2
+
+
+#### CallApp段，根据容器名找专属优化，没有就走通用启动
 CallApp()
 {
     FixLink
@@ -475,6 +490,9 @@ CallApp()
             ;;
         "Deepin-CS6")
             CallPsCs6 "$@"
+            ;;
+         "Spark-flyele")
+            CallFlyele "$@"
             ;;
         *)
             CallProcess "$@"
