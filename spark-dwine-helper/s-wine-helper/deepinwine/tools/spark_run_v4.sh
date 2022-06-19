@@ -158,6 +158,16 @@ CallProcess()
 ###有设置mimetype和自动启动(这个暂时没分析)的功能
 
 ###########专属优化段：
+CallDouyin()
+{
+    if [ -f "${WINEPREFIX}/drive_c/users/${USER}/Application Data/douyin" ]; then
+       rm -f "${WINEPREFIX}/drive_c/users/${USER}/Application Data/douyin"
+       mv ${WINEPREFIX}/drive_c/users/${USER}/Application\ Data/*.tmp ${WINEPREFIX}/drive_c/users/${USER}/Application\ Data/douyin
+       chmod 555 "${WINEPREFIX}/drive_c/users/${USER}/Application Data/douyin"
+    fi
+    CallProcess "$@"
+}
+
 CallFlyele() 
 {
     if [ -w ${WINEPREFIX}/drive_c/users/${USER}/Application\ Data/飞项/Crashpad/reports ]; then
@@ -222,22 +232,6 @@ CallQQ()
     CallProcess "$@"
 }
 
-CallTiktokCN()
-{
-    if [ ! -f "$WINEPREFIX/../.TiktokCN_run" ]; then
-        debug_log "first run time"
-        $SHELL_DIR/add_hotkeys
-        $SHELL_DIR/fontconfig
-        touch "$WINEPREFIX/../.TiktokCN_run"
-    fi
-
-    chmod 555 /home/${USER}/.deepinwine/Spark-tiktokCN/drive_c/users/${USER}/Application\ Data/douyin
-    chmod 555 /home/${USER}/.deepinwine/Spark-tiktokCN/drive_c/users/@surrent_user@/Application\ Data/douyin
-    chmod 555 /home/${USER}/.deepinwine/Spark-tiktokCN.tmpdir/drive_c/users/${USER}/Application\ Data/douyin
-    chmod 555 /home/${USER}/.deepinwine/Spark-tiktokCN.tmpdir/drive_c/users/@surrent_user@/Application\ Data/douyin
-
-    CallProcess "$@"
-}
 
 CallTIM()
 {
@@ -431,8 +425,6 @@ CallApp()
         "Deepin-WangWang")
             CallWangWang "$@"
             ;;
-        "Spark-tiktokCN")
-            CallTiktokCN "$@"
             ;;
         "Deepin-ZhuMu")
             CallZhuMu "$@"
@@ -493,6 +485,9 @@ CallApp()
             ;;
          "Spark-flyele")
             CallFlyele "$@"
+            ;;
+	"Spark-douyin")
+            CallDouyin "$@"
             ;;
         *)
             CallProcess "$@"
