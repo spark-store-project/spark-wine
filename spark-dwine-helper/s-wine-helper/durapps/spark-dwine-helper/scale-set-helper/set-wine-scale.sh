@@ -80,9 +80,7 @@ if [ ! -f "$CONTAINER_PATH/scale.txt" ];then
 fi
 else
 wine_scale=`cat $CONTAINER_PATH/scale.txt`
-if [ -n "$DEEPIN_WINE_SCALE" ] && [ "$DEEPIN_WINE_SCALE" != "$wine_scale" ];then
-zenity --info --text="检测到您的缩放设置和Deepin默认的不同。这可能是您的个人设置，因此不会自动同步\n您可以删除$CONTAINER_PATH/scale.txt来同步设置" --width=500 --height=150 --timeout=5 &
-fi
+
 echo "检测到的缩放倍数为:$wine_scale"
 echo "Scale is $wine_scale"
 
