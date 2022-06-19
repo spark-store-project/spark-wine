@@ -44,7 +44,7 @@ echo "普通deb包已经准备好，正在生成UOS deb包"
 rm -rf pkg/
 #########################################
 mkdir -p pkg/DEBIAN
-cp -r package-source/uos-assests/opt pkg/
+cp -r package-source/uos-assets/opt pkg/
 cp -r s-wine-helper/* pkg/opt
 
 cat  << EOF >pkg/opt/apps/store.spark-app.spark-dwine-helper/info
