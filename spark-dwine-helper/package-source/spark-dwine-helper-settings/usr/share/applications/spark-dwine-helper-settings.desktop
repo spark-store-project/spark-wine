@@ -2,12 +2,12 @@
 Categories=Utility;
 Encoding=UTF-8
 Exec=sh -c "/opt/durapps/spark-dwine-helper/spark-dwine-helper-settings/settings.sh"
-Icon=store.spark-app.spark-dwine-helper
+Icon=spark-dwine-helper-settings
 MimeType=
 Name=Spark Wine Helper Settings
 Name[zh_CN]=星火wine助手设置
 StartupWMClass=spark-dwine-helper-settings
 Terminal=False
 Type=Application
-NoDisplay=true
+NoDisplay=false
 X-Deepin-Vendor=user-custom

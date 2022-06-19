@@ -12,11 +12,10 @@ exit 1
 fi
 
 version="$1"
-
+######################################################
 echo "build debian package"
 mkdir -p  pkg/DEBIAN
 cp -r ./s-wine-helper pkg/opt
-
 SIZE=`du -s ./pkg`
 SIZE=`echo ${SIZE%%.*}`
 
@@ -29,8 +28,9 @@ Installed-Size: $SIZE
 Depends: zenity:amd64, p7zip-full:amd64, fonts-noto-cjk,deepin-wine-helper(>=5.1)
 Section: utils
 Priority: extra
+Recommends: spark-dwine-helper-settings
 Multi-Arch: foreign
-Replaces: store.spark-app.spark-dwine-helper(<<$version)
+Replaces: store.spark-app.spark-dwine-helper(<=$version)
 Homepage: https://gitee.com/deepin-community-store/spark-wine
 Description: Spark Deepin Wine Helper
 
@@ -42,7 +42,7 @@ cd ..
 
 echo "普通deb包已经准备好，正在生成UOS deb包"
 rm -rf pkg/
-#########################################
+#################################################################
 mkdir -p pkg/DEBIAN
 cp -r package-source/uos-assets/opt pkg/
 cp -r s-wine-helper/* pkg/opt
@@ -82,9 +82,10 @@ Installed-Size: $SIZE
 Depends: zenity:amd64, p7zip-full:amd64, fonts-noto-cjk,deepin-wine-helper(>=5.1)
 Section: utils
 Priority: extra
+Recommends: spark-dwine-helper-settings
 Provides: spark-dwine-helper(=$version)
 Conflicts: spark-dwine-helper
-Replaces: spark-dwine-helper(<<$version)
+Replaces: spark-dwine-helper(<=$version)
 Multi-Arch: foreign
 Homepage: https://gitee.com/deepin-community-store/spark-wine
 Description: Spark Deepin Wine Helper
@@ -96,4 +97,32 @@ cd pkg && fakeroot dpkg-deb -Z xz -b . ../
 cd ..
 
 echo "UOS deb包已经准备好"
+rm -rf pkg/
+########################################
+mkdir -p pkg/DEBIAN
+cp -r package-source/spark-dwine-helper-settings/* pkg/
+SIZE=`du -s ./pkg`
+SIZE=`echo ${SIZE%%.*}`
+
+cat  << EOF >pkg/DEBIAN/control
+Package: spark-dwine-helper-settings
+Version: 1.0
+Architecture: all
+Maintainer: shenmo <shenmo@spark-app.store>
+Installed-Size: $SIZE
+Depends: spark-dwine-helper(>=1.6)
+Section: utils
+Priority: extra
+Multi-Arch: foreign
+Homepage: https://gitee.com/deepin-community-store/spark-wine
+Description: Spark Deepin Wine Helper
+
+
+
+EOF
+
+cd pkg && fakeroot dpkg-deb -Z xz -b . ../
+cd ..
+
+echo "helper deb包已经准备好"
 rm -rf pkg/

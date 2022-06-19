@@ -65,11 +65,11 @@ scale_factor=`zenity --list \
 
 case "$scale_factor" in 
 	"")
-	zenity --info --text="默认为1倍缩放。您可以随时删除~/.config/spark-wine/scale.txt来重新设置" --width=500 --height=150
+	zenity --info --text="默认为1倍缩放。您可以使用星火wine助手设置来重新设置" --width=500 --height=150
 	scale_factor="1.0"
 	;;
 	*)
-zenity --info --text="缩放倍数为$scale_factor。已保存！您可以随时删除~/.config/spark-wine/scale.txt来重新设置" --width=500 --height=150
+zenity --info --text="缩放倍数为$scale_factor。已保存！您可以使用星火wine助手设置来重新设置" --width=500 --height=150
 	;;
 esac
 echo "$scale_factor" > $HOME/.config/spark-wine/scale.txt
