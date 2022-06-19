@@ -37,6 +37,26 @@ Description: Spark Deepin Wine Helper
 
 EOF
 
+cat  << EOF >pkg/DEBIAN/postrm
+if [ "$1" = "remove" ] || [ "$1" = "purge" ];then
+
+echo "清理卸载残留"
+for username in `ls /home`  
+    do
+      echo /home/$username
+        if [ -d /home/$username/.config/spark-wine ]  
+        then
+        rm -rf /home/$username/.config/spark-wine
+        fi
+    done
+else
+echo "非卸载，跳过清理"
+fi
+
+
+EOF
+chmod +x pkg/DEBIAN/postrm
+
 cd pkg && fakeroot dpkg-deb -Z xz -b . ../
 cd ..
 
