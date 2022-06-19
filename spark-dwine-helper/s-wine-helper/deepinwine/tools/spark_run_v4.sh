@@ -425,7 +425,6 @@ CallApp()
         "Deepin-WangWang")
             CallWangWang "$@"
             ;;
-            ;;
         "Deepin-ZhuMu")
             CallZhuMu "$@"
             ;;
@@ -483,10 +482,10 @@ CallApp()
         "Deepin-CS6")
             CallPsCs6 "$@"
             ;;
-         "Spark-flyele")
+        "Spark-flyele")
             CallFlyele "$@"
             ;;
-	"Spark-douyin")
+	 "Spark-douyin")
             CallDouyin "$@"
             ;;
         *)
