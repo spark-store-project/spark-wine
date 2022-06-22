@@ -50,7 +50,7 @@ echo "$scale_factor" > $HOME/.config/spark-wine/scale.txt
 
 	"设置单独应用缩放")
 	zenity --info --text="请在接下来的文件选择框选中所需的应用所在的容器文件夹（注意要选择文件夹）" --width=500 --height=150
-	CONTAINER_PATH=`zenity --file-selection --filename="/home/shenmo/.deepinwine/" --directory`
+	CONTAINER_PATH=`zenity --file-selection --filename="$HOME/.deepinwine/" --directory`
 	
 	if [ ! -f "$CONTAINER_PATH/user.reg" ];then
 	zenity --info --text="错误：找不到user.reg.这不是一个wine容器" --width=500 --height=150
