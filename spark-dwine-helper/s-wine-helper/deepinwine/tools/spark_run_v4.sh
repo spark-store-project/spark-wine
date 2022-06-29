@@ -443,7 +443,7 @@ CallApp()
         "Deepin-WeChat")
             CallWeChat "$@"
             ;;
-        "Deepin-WXWork")
+        "Deepin-WXWork"|"Spark-WeCom")
             CallWXWork "$@"
             ;;
         "Deepin-Dding")
@@ -485,7 +485,7 @@ CallApp()
         "Spark-flyele")
             CallFlyele "$@"
             ;;
-	 "Spark-douyin")
+	    "Spark-douyin")
             CallDouyin "$@"
             ;;
         *)
