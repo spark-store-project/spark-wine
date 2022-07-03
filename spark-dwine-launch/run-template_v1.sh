@@ -29,6 +29,9 @@ Get_Dist_Name()
 
 ####获得发行版名称
 
+##默认屏蔽mono和gecko安装器
+export WINEDLLOVERRIDES="mscoree,mshtml="
+
 #########################预设值段
 
 version_gt() { test "$(echo "$@" | tr " " "\n" | sort -V | head -n 1)" != "$1"; }
