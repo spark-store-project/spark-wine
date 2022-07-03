@@ -27,10 +27,8 @@ Get_Dist_Name()
 	fi
 }
 
-####获得发行版名称
 
-##默认屏蔽mono和gecko安装器
-export WINEDLLOVERRIDES="mscoree,mshtml="
+####获得发行版名称
 
 #########################预设值段
 
@@ -75,8 +73,20 @@ echo "To用户：打包者没有打开这个功能，这证明启用这个功能
 fi
 ##############>>>>>>>>>禁用文件选择工具结束
 
+##############<<<<<<<<<屏蔽mono和gecko安装器开始
+##默认屏蔽mono和gecko安装器
+if [ "$APPRUN_CMD" = "spark-wine7-devel" ];then
+
+export WINEDLLOVERRIDES="mscoree,mshtml="
+echo "为了降低打包体积，默认关闭gecko和momo，如有需要，注释此行（仅对spark-wine7-devel有效）"
+
+fi
+##############>>>>>>>>>屏蔽mono和gecko安装器结束
 
 #########################执行段
+
+
+
 
 if [ -z "$DISABLE_ATTACH_FILE_DIALOG" ];then
     export ATTACH_FILE_DIALOG=1
