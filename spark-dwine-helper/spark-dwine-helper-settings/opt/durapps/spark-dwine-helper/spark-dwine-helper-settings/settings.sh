@@ -10,7 +10,7 @@ CHOSEN_SETTINGS=`zenity --list \
        --column="操作" \
 	设置全局缩放 \
        设置单独应用缩放 \
-	以上操作仅对使用了spark-dwine-helper的应用生效 `
+	备注：以上操作仅对使用了spark-dwine-helper的应用生效 `
 
 echo "$CHOSEN_SETTINGS"
 case "$CHOSEN_SETTINGS" in 

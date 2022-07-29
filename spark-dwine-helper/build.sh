@@ -64,7 +64,7 @@ echo "普通deb包已经准备好，正在生成UOS deb包"
 rm -rf pkg/
 #################################################################
 mkdir -p pkg/DEBIAN
-cp -r package-source/uos-assets/opt pkg/
+cp -r uos-package-assets/opt pkg/
 cp -r s-wine-helper/* pkg/opt
 
 cat  << EOF >pkg/opt/apps/store.spark-app.spark-dwine-helper/info
@@ -120,13 +120,13 @@ echo "UOS deb包已经准备好"
 rm -rf pkg/
 ########################################
 mkdir -p pkg/DEBIAN
-cp -r package-source/spark-dwine-helper-settings/* pkg/
+cp -r spark-dwine-helper-settings/* pkg/
 SIZE=`du -s ./pkg`
 SIZE=`echo ${SIZE%%.*}`
 
 cat  << EOF >pkg/DEBIAN/control
 Package: spark-dwine-helper-settings
-Version: 1.0
+Version: 1.1
 Architecture: all
 Maintainer: shenmo <shenmo@spark-app.store>
 Installed-Size: $SIZE
