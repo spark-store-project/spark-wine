@@ -81,6 +81,13 @@ export WINEDLLOVERRIDES="mscoree,mshtml="
 echo "为了降低打包体积，默认关闭gecko和momo，如有需要，注释此行（仅对spark-wine7-devel有效）"
 
 fi
+#####################################
+if [ "$APPRUN_CMD" = "ukylin-wine" ];then
+
+export WINEDLLOVERRIDES="mscoree,mshtml="
+echo "同上，修正ukylin-wine"
+
+fi
 ##############>>>>>>>>>屏蔽mono和gecko安装器结束
 
 #########################执行段
