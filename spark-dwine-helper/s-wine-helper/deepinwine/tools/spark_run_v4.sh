@@ -422,7 +422,7 @@ CallApp()
     debug_log "CallApp $BOTTLENAME arg count $#: $*"
 
     case $BOTTLENAME in
-        "Deepin-WangWang"|"AliIm-taobao")
+        "Deepin-WangWang")
             CallWangWang "$@"
             ;;
         "Deepin-ZhuMu")

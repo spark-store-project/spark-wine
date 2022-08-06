@@ -45,7 +45,8 @@ export DEB_PACKAGE_NAME="包名"
 ####这里写包名才能在启动的时候正确找到files.7z,似乎也和杀残留进程有关
 export APPRUN_CMD="deepin-wine6-stable"
 #####wine启动指令，建议
-EXPORT_ENVS=""
+EXPORT_ENVS="wine的动态链接库路径"
+##例如我的wine应用是使用的dwine6的32位元容器，那么我要填LD_LIBRARY_PATH=$LD_LIBRARY;/opt/deepin-wine6-stable/lib
 
 export SPECIFY_SHELL_DIR=`dirname $START_SHELL_PATH`
 
