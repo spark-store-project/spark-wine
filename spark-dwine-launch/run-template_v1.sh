@@ -80,7 +80,7 @@ fi
 if [ "$APPRUN_CMD" = "spark-wine7-devel" ];then
 
 export WINEDLLOVERRIDES="mscoree,mshtml="
-echo "为了降低打包体积，默认关闭gecko和momo，如有需要，注释此行（仅对spark-wine7-devel有效）"
+#### "为了降低打包体积，默认关闭gecko和momo，如有需要，注释此行（仅对spark-wine7-devel有效）"
 
 fi
 ##############>>>>>>>>>屏蔽mono和gecko安装器结束
