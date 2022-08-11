@@ -37,6 +37,8 @@ Description: Spark Deepin Wine Helper
 
 EOF
 
+cp postrm pkg/DEBIAN/postrm
+
 
 chmod +x pkg/DEBIAN/postrm
 
