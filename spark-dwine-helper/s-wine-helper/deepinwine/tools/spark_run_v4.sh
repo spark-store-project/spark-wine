@@ -163,15 +163,15 @@ CallDouyin()
     if [ -f "${WINEPREFIX}/drive_c/users/${USER}/Application Data/douyin" ]; then
        rm "${WINEPREFIX}/drive_c/users/${USER}/Application Data/douyin"
        mv ${WINEPREFIX}/drive_c/users/${USER}/Application\ Data/*.tmp ${WINEPREFIX}/drive_c/users/${USER}/Application\ Data/douyin
-       chmod 755 ${WINEPREFIX}/drive_c/users/${USER}/Application Data/douyin
+       chmod 755 ${WINEPREFIX}/drive_c/users/${USER}/Application\ Data/douyin
     fi
     CallProcess "$@"
 }
 
 CallMuBu()
 {
-    if [ -f "${WINEPREFIX}/drive_c/ProgramData/Microsoft/Windows/Start Menu/Programs/MuBu.lnk" ]; then
-       chmod 555 ${WINEPREFIX}/drive_c/ProgramData/Microsoft/Windows/Start Menu/Programs/MuBu.lnk
+    if [ -f "${WINEPREFIX}/drive_c/ProgramData/Microsoft/Windows/Start\ Menu/Programs/MuBu.lnk" ]; then
+       chmod 555 ${WINEPREFIX}/drive_c/ProgramData/Microsoft/Windows/Start\ Menu/Programs/MuBu.lnk
     fi
     CallProcess "$@"
 }
