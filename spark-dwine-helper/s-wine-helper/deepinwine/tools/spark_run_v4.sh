@@ -142,7 +142,8 @@ CallProcess()
     if [ -n "$MIME_TYPE" ]; then
         xdg-mime default "$DEB_PACKAGE_NAME".desktop "$MIME_TYPE"
     fi
-
+    # Unuse winemenubuilder
+    env WINEPREFIX="$WINEPREFIX" $WINE_CMD reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v winemenubuilder /f
     debug_log_to_file "Starting process $* ..."
 	#############  WARNING: Here is the modified content: Now will run set-dwine-scale.sh
 	/opt/durapps/spark-dwine-helper/scale-set-helper/set-wine-scale.sh "$WINEPREFIX"
