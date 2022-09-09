@@ -39,14 +39,16 @@ APPVER="版本号"
 EXEC_PATH="启动路径"
 ##### 软件在wine中的启动路径
 START_SHELL_PATH="/opt/deepinwine/tools/spark_run_v4.sh"
+ENABLE_DOT_NET=""
+####若使用spark-wine7-devel时需要用到.net，则请把ENABLE_DOT_NET设为true，同时在依赖中写spark-wine7-mono
 export MIME_TYPE=""
-#####没什么用
+
 export DEB_PACKAGE_NAME="包名"
 ####这里写包名才能在启动的时候正确找到files.7z,似乎也和杀残留进程有关
 export APPRUN_CMD="deepin-wine6-stable"
 #####wine启动指令，建议
 #EXPORT_ENVS="wine的动态链接库路径"
-##例如我的wine应用是使用的dwine6的32位元容器，那么我要填LD_LIBRARY_PATH=$LD_LIBRARY;/opt/deepin-wine6-stable/lib
+##例如我的wine应用是使用的dwine6的32位容器，那么我要填LD_LIBRARY_PATH=$LD_LIBRARY;/opt/deepin-wine6-stable/lib
 ## 如果用不到就不填，不要删除前面的注释用的#
 
 export SPECIFY_SHELL_DIR=`dirname $START_SHELL_PATH`
@@ -65,7 +67,7 @@ DISABLE_ATTACH_FILE_DIALOG=""
 
 ##############<<<<<<<<<禁用文件选择工具开始
 Get_Dist_Name
-#此功能实现参见结尾函数段
+#此功能实现参见开头函数段
 if [ "$DISTRO" != "Deepin" ] && [ "$DISTRO" != "UniontechOS" ];then
 DISABLE_ATTACH_FILE_DIALOG="1"
 echo "非deepin/UOS，默认关闭系统自带的文件选择工具，使用Wine的"
@@ -75,7 +77,15 @@ echo "To用户：打包者没有打开这个功能，这证明启用这个功能
 fi
 ##############>>>>>>>>>禁用文件选择工具结束
 
+##############<<<<<<<<<屏蔽mono和gecko安装器开始
+##默认屏蔽mono和gecko安装器
+if [ "$APPRUN_CMD" = "spark-wine7-devel" ] && [ -z "$ENABLE_DOT_NET"];then
 
+export WINEDLLOVERRIDES="mscoree,mshtml="
+#### "为了降低打包体积，默认关闭gecko和momo，如有需要，注释此行（仅对spark-wine7-devel有效）"
+
+fi
+##############>>>>>>>>>屏蔽mono和gecko安装器结束
 
 #########################执行段
 
