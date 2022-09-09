@@ -10,6 +10,7 @@ CHOSEN_SETTINGS=`zenity --list \
        --column="操作" \
 	设置全局缩放 \
        设置单独应用缩放 \
+	一键将所有已安装应用的缩放设置改为与全局缩放一致 \
 	备注：以上操作仅对使用了spark-dwine-helper的应用生效 `
 
 echo "$CHOSEN_SETTINGS"
@@ -88,6 +89,10 @@ esac
 
 
 fi
+	;;
+	"一键将所有已安装应用的缩放设置改为与全局缩放一致")
+	find ${HOME}/.deepinwine/ -name "scale.txt" -type f -print -exec rm -rf {} \;
+	zenity --info --text="以下容器中的应用的缩放设置已与全局设置同步：\n`cd ${HOME}/.deepinwine/ && ls`" --width=500 --height=150
 	;;
 	"以上操作仅对使用了spark-dwine-helper的应用生效")
 	

@@ -111,7 +111,7 @@ SIZE=`echo ${SIZE%%.*}`
 
 cat  << EOF >pkg/DEBIAN/control
 Package: spark-dwine-helper-settings
-Version: 1.1
+Version: 1.2
 Architecture: all
 Maintainer: shenmo <shenmo@spark-app.store>
 Installed-Size: $SIZE
