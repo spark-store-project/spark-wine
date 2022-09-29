@@ -440,7 +440,7 @@ CallApp()
         "Deepin-QQ"|"Wine-QQ"|"Spark-QQ")
             CallQQ "$@"
             ;;
-        "Deepin-TIM")
+        "Deepin-TIM"|"Spark-TIM")
             CallTIM "$@"
             ;;
         "Deepin-QQGame"*)
