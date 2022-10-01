@@ -391,6 +391,8 @@ CallQQGameV2()
     CallProcess "$1" -action:force_download -appid:${2} -pid:8 -bin_version:1.1.2.4 -loginuin: 
 }
 
+
+
 CallPsCs6()
 {
     #get file full path
@@ -414,6 +416,13 @@ CallPsCs6()
 
     debug_log_to_file "Starting process $* ..."
 
+    CallProcess "$@"
+}
+
+CallIE8()
+{
+    rm -f "$WINEPREFIX/system.reg"
+    cp $APPDIR/system.reg "$WINEPREFIX/system.reg"
     CallProcess "$@"
 }
 
@@ -499,6 +508,9 @@ CallApp()
             ;;
 	    "Spark-douyin")
             CallDouyin "$@"
+            ;;
+	    "IE8")
+            CallIE8 "$@"
             ;;
         *)
             CallProcess "$@"
