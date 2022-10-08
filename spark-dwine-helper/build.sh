@@ -30,6 +30,7 @@ Section: utils
 Priority: extra
 Recommends: spark-dwine-helper-settings
 Multi-Arch: foreign
+Provides: store.spark-app.spark-dwine-helper(=$version)
 Replaces: store.spark-app.spark-dwine-helper(<=$version)
 Homepage: https://gitee.com/deepin-community-store/spark-wine
 Description: Spark Deepin Wine Helper
