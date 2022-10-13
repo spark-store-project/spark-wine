@@ -428,10 +428,20 @@ CallIE8()
 
 #####专属优化段结束
 
+UnixUriToDosPath()
+{
+    OPEN_FILE="$1"
+    if [ -f "$OPEN_FILE" ]; then
+        OPEN_FILE=$(realpath "$OPEN_FILE")
+        OPEN_FILE="z:$OPEN_FILE"
+        OPEN_FILE=$(echo $OPEN_FILE | sed -e 's/\//\\\\/g')
+    fi
+    echo $OPEN_FILE
+}
+
 #arg 1: exec file path
 #arg 2: autostart ,or exec arg 1
 #arg 3: exec arg 2
-
 
 #### CallApp段，根据容器名找专属优化，没有就走通用启动
 CallApp()
@@ -601,10 +611,14 @@ ParseArgs()
 {
     if [ $# -eq 4 ];then
 	    RunApp "$3"
-    elif [ $# -eq 5 ];then
-	    RunApp "$3" "$5"
+    elif [ -f "$5" ];then
+	    if [ -n "$MIME_EXEC" ];then
+		    RunApp "$MIME_EXEC" "$(UnixUriToDosPath "$5")" "${@:6}"
+	    else
+		    RunApp "$3" "$(UnixUriToDosPath "$5")" "${@:6}"
+	    fi
     else
-	    RunApp "$3" "$5" "$6"
+	    RunApp "$3" "${@:5}"
     fi
 }
 
