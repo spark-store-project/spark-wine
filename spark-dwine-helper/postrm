@@ -1,3 +1,4 @@
+#!/bin/bash
 if [ "$1" = "remove" ] || [ "$1" = "purge" ];then
 
 echo "清理卸载残留"
