@@ -9,8 +9,10 @@ echo "W: 没有指定容器，跳过清理容器。请手动前往 ~/.deepinwine
 exit
 fi
 
+if [ -e /opt/deepinwine/tools/kill.sh ];then
 /opt/deepinwine/tools/kill.sh $CONTAINER_NAME
 ###这里注意，如果没写CONTAINER_NAME,会把QQ杀了
+fi
 
 for username in $(ls /home)  
     do
