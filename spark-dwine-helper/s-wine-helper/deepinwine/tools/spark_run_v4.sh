@@ -471,7 +471,7 @@ CallApp()
         "Deepin-WeChat")
             CallWeChat "$@"
             ;;
-        "Deepin-WXWork"|"Spark-WeCom")
+        "Deepin-WXWork"|"Spark-WeCom"|"wxwork-spark-uk")
             CallWXWork "$@"
             ;;
         "Deepin-Dding")
