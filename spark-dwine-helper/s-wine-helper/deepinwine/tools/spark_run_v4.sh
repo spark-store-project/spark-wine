@@ -159,6 +159,13 @@ CallProcess()
 ###有设置mimetype和自动启动(这个暂时没分析)的功能
 
 ###########专属优化段：
+
+CalleCloud()
+{
+    DisableWrite ${WINEPREFIX}/drive_c/users/${USER}/Temp
+    CallProcess "$@"
+}
+
 CallDouyin()
 {
     if [ -f "${WINEPREFIX}/drive_c/users/${USER}/Application Data/douyin" ]; then
@@ -519,10 +526,14 @@ CallApp()
 	    "Spark-douyin")
             CallDouyin "$@"
             ;;
+	    "Spark-ecloud")
+            CalleCloud "$@"
+            ;;
+        *)
 	    "IE8")
             CallIE8 "$@"
             ;;
-        *)
+        *)        
             CallProcess "$@"
             ;;
     esac
