@@ -529,7 +529,6 @@ CallApp()
 	    "Spark-ecloud")
             CalleCloud "$@"
             ;;
-        *)
 	    "IE8")
             CallIE8 "$@"
             ;;
