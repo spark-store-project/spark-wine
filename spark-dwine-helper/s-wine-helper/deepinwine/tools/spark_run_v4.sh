@@ -162,7 +162,7 @@ CallProcess()
 
 CalleCloud()
 {
-    chmod 000 ${WINEPREFIX}/drive_c/users/${USER}/Temp
+    DisableWrite ${WINEPREFIX}/drive_c/users/${USER}/Temp
     CallProcess "$@"
 }
 
