@@ -1,7 +1,7 @@
 #!/bin/bash
 
-PACK_NAME="deepin.com.baidu.pan"
-CONTAINER_NAME="Deepin-BaiduNetDisk"
+PACK_NAME=""
+CONTAINER_NAME=""
 MIME_TYPE=""
 ACTIVEX_NAME=""
 MAKE_AUTOSTART=""
@@ -14,7 +14,7 @@ make_autostart()
     do
         if [ -d "/home/$file/.config/autostart" ]
         then
-            cp /opt/apps/deepin.com.baidu.pan/entries/applications/${PACK_NAME}.desktop /home/$file/.config/autostart/
+            cp /opt/apps/$PACK_NAME/entries/applications/${PACK_NAME}.desktop /home/$file/.config/autostart/
             sed -i "s#%u#\"autostart\"#" /home/$file/.config/autostart/${PACK_NAME}.desktop
         fi
     done
@@ -28,7 +28,7 @@ send_to_desktop()
         then
             desktop=$(cat /etc/xdg/user-dirs.defaults | grep DESKTOP | awk -F= '{print $2}')
             if [ -d "/home/$file/$desktop" ]; then
-                cp /opt/apps/deepin.com.baidu.pan/entries/applications/${PACK_NAME}*.desktop /home/$file/$desktop
+                cp /opt/apps/$PACK_NAME/entries/applications/${PACK_NAME}*.desktop /home/$file/$desktop
             fi
         fi
     done
