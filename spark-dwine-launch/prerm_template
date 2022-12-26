@@ -1,7 +1,7 @@
 #!/bin/sh
 
-PACK_NAME="deepin.com.baidu.pan"
-CONTAINER_NAME="Deepin-BaiduNetDisk"
+PACK_NAME=""
+CONTAINER_NAME=""
 MIME_TYPE=""
 ACTIVEX_NAME=""
 MAKE_AUTOSTART=""
