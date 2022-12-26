@@ -1,0 +1,17 @@
+#!/bin/sh
+
+PACK_NAME="deepin.com.baidu.pan"
+CONTAINER_NAME="Deepin-BaiduNetDisk"
+MIME_TYPE=""
+ACTIVEX_NAME=""
+MAKE_AUTOSTART=""
+SEND_TO_DESKTOP=""
+
+if [ -n "$MIME_TYPE" ]; then
+    /opt/apps/$PACK_NAME/files/unregister_mimetype
+fi
+
+# Make sure the script returns 0
+true
+
+
