@@ -2,8 +2,8 @@
 if [ "$1" = "remove" ] || [ "$1" = "purge" ];then
 
 echo "清理卸载残留"
-CONTAINER_NAME=""
-PACK_NAME=""
+BOTTLE_NAME="" #容器名
+PACK_NAME=""   #软体套件名
 MIME_TYPE=""
 ACTIVEX_NAME=""
 MAKE_AUTOSTART=""
@@ -13,9 +13,9 @@ make_autostart()
 {
     for file in $(ls /home)
     do
-        if [ -d "/home/$file/.config/autostart" ]
+        if [ -d "/home/${USER}/.config/autostart" ]
         then
-            rm /home/$file/.config/autostart/${PACK_NAME}.desktop
+            rm /home/${USER}/.config/autostart/${PACK_NAME}.desktop
         fi
     done
 }
@@ -24,11 +24,11 @@ send_to_desktop()
 {
     for file in $(ls /home)
     do
-        if [ -d "/home/$file/.config/autostart" ]
+        if [ -d "/home/${USER}/.config/autostart" ]
         then
             desktop=$(cat /etc/xdg/user-dirs.defaults | grep DESKTOP | awk -F= '{print $2}')
-            if [ -d "/home/$file/$desktop" ]; then
-                rm /home/$file/$desktop/${PACK_NAME}*.desktop
+            if [ -d "/home/${USER}/$desktop" ]; then
+                rm /home/${USER}/$desktop/${PACK_NAME}*.desktop
             fi
         fi
     done
@@ -47,22 +47,22 @@ if [ -n "$ACTIVEX_NAME" ]; then
 fi
 
 
-if [ -z $CONTAINER_NAME ];then
+if [ -z $BOTTLE_NAME ];then
 echo "W: 没有指定容器，跳过清理容器。请手动前往 ~/.deepinwine/ 下删除"
 exit
 fi
 
 if [ -e /opt/deepinwine/tools/kill.sh ];then
-/opt/deepinwine/tools/kill.sh $CONTAINER_NAME
-###这里注意，如果没写CONTAINER_NAME,会把QQ杀了
+/opt/deepinwine/tools/kill.sh $BOTTLE_NAME
+###这里注意，如果没写BOTTLE_NAME,会把QQ杀了
 fi
 
 for username in $(ls /home)  
     do
       echo /home/$username
-        if [ -d /home/$username/.deepinwine/$CONTAINER_NAME ]  
+        if [ -d /home/$username/.deepinwine/$BOTTLE_NAME ]  
         then
-        rm -rf /home/$username/.deepinwine/$CONTAINER_NAME
+        rm -rf /home/$username/.deepinwine/$BOTTLE_NAME
         fi
     done
 else
