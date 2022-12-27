@@ -1,7 +1,7 @@
 #!/bin/bash
 
-PACK_NAME=""
-CONTAINER_NAME=""
+PACK_NAME="" #软体套件名
+BOTTLE_NAME="" #容器名
 MIME_TYPE=""
 ACTIVEX_NAME=""
 MAKE_AUTOSTART=""
@@ -12,10 +12,10 @@ make_autostart()
 {
     for file in $(ls /home)
     do
-        if [ -d "/home/$file/.config/autostart" ]
+        if [ -d "/home/${USER}/.config/autostart" ]
         then
-            cp /opt/apps/$PACK_NAME/entries/applications/${PACK_NAME}.desktop /home/$file/.config/autostart/
-            sed -i "s#%u#\"autostart\"#" /home/$file/.config/autostart/${PACK_NAME}.desktop
+            cp /opt/apps/$PACK_NAME/entries/applications/${PACK_NAME}.desktop /home/${USER}/.config/autostart/
+            sed -i "s#%u#\"autostart\"#" /home/${USER}/.config/autostart/${PACK_NAME}.desktop
         fi
     done
 }
@@ -24,11 +24,11 @@ send_to_desktop()
 {
     for file in $(ls /home)
     do
-        if [ -d "/home/$file/.config/autostart" ]
+        if [ -d "/home/${USER}/.config/autostart" ]
         then
             desktop=$(cat /etc/xdg/user-dirs.defaults | grep DESKTOP | awk -F= '{print $2}')
-            if [ -d "/home/$file/$desktop" ]; then
-                cp /opt/apps/$PACK_NAME/entries/applications/${PACK_NAME}*.desktop /home/$file/$desktop
+            if [ -d "/home/${USER}/$desktop" ]; then
+                cp /opt/apps/$PACK_NAME/entries/applications/${PACK_NAME}*.desktop /home/${USER}/$desktop
             fi
         fi
     done
