@@ -3,11 +3,9 @@ if [ "$1" = "remove" ] || [ "$1" = "purge" ];then
 
 echo "清理卸载残留"
 BOTTLE_NAME="" #容器名
-PACK_NAME=""   #软体套件名
-MIME_TYPE=""
+PACK_NAME=""   #软件包名
 ACTIVEX_NAME=""
-MAKE_AUTOSTART="" #开机时自动执行，需要实现请填写1
-SEND_TO_DESKTOP="" #将启动图示从工作管理员copy至系统桌面，需要实现请填写1
+MAKE_AUTOSTART="" #如果先前设置了开机自启，则在此处填写1
 
 make_autostart()
 {
@@ -21,28 +19,12 @@ for username in $(ls /home)
     done
 }
 
-send_to_desktop()
-{
- for username in $(ls /home)  
-    do
-      echo /home/$username
-        if [ -d "/home/$username/.config/autostart" ]
-        then
-            desktop=$(cat /etc/xdg/user-dirs.defaults | grep DESKTOP | awk -F= '{print $2}')
-            if [ -d "/home/$username/$desktop" ]; then
-                rm /home/$username/$desktop/$PACK_NAME*.desktop
-            fi
-        fi
-    done
-}
+
 
 if [ -n "$MAKE_AUTOSTART" ]; then
     make_autostart
 fi
 
-if [ -n "$SEND_TO_DESKTOP" ]; then
-    send_to_desktop
-fi
 
 if [ -n "$ACTIVEX_NAME" ]; then
     rm /usr/lib/mozilla/plugins/libpipelight-$ACTIVEX_NAME.so

@@ -1,11 +1,9 @@
 #!/bin/bash
 
-PACK_NAME="" #软体套件名
+PACK_NAME="" #软件包名
 BOTTLE_NAME="" #容器名
-MIME_TYPE=""
 ACTIVEX_NAME=""
-MAKE_AUTOSTART="" #开机时自动执行，需要实现请填写1
-SEND_TO_DESKTOP="" #将启动图示从工作管理员copy至系统桌面，需要实现请填写1
+MAKE_AUTOSTART="" #若需要开机自启，则填写1
 
 
 make_autostart()
@@ -21,28 +19,13 @@ make_autostart()
     done
 }
 
-send_to_desktop()
-{
-    for username in $(ls /home)
-    do
-        echo /home/$username
-        if [ -d "/home/$username/.config/autostart" ]
-        then
-            desktop=$(cat /etc/xdg/user-dirs.defaults | grep DESKTOP | awk -F= '{print $2}')
-            if [ -d "/home/$username/$desktop" ]; then
-                cp /opt/apps/$PACK_NAME/entries/applications/$PACK_NAME*.desktop /home/$username/$desktop
-            fi
-        fi
-    done
-}
+
 
 if [ -n "$MAKE_AUTOSTART" ]; then
     make_autostart
 fi
 
-if [ -n "$SEND_TO_DESKTOP" ]; then
-    send_to_desktop
-fi
+
 
 if [ -n "$ACTIVEX_NAME" ]; then
     if [ ! -d "/usr/lib/mozilla/plugins" ];then
