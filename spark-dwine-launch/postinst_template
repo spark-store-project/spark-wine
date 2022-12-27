@@ -4,8 +4,8 @@ PACK_NAME="" #软体套件名
 BOTTLE_NAME="" #容器名
 MIME_TYPE=""
 ACTIVEX_NAME=""
-MAKE_AUTOSTART=""
-SEND_TO_DESKTOP=""
+MAKE_AUTOSTART="" #开机时自动执行，需要实现请填写1
+SEND_TO_DESKTOP="" #将启动图示从工作管理员copy至系统桌面，需要实现请填写1
 
 
 make_autostart()
@@ -14,8 +14,8 @@ make_autostart()
     do
         if [ -d "/home/${USER}/.config/autostart" ]
         then
-            cp /opt/apps/$PACK_NAME/entries/applications/${PACK_NAME}.desktop /home/${USER}/.config/autostart/
-            sed -i "s#%u#\"autostart\"#" /home/${USER}/.config/autostart/${PACK_NAME}.desktop
+            cp /opt/apps/$PACK_NAME/entries/applications/$PACK_NAME.desktop /home/${USER}/.config/autostart/
+            sed -i "s#%u#\"autostart\"#" /home/${USER}/.config/autostart/$PACK_NAME.desktop
         fi
     done
 }
@@ -28,7 +28,7 @@ send_to_desktop()
         then
             desktop=$(cat /etc/xdg/user-dirs.defaults | grep DESKTOP | awk -F= '{print $2}')
             if [ -d "/home/${USER}/$desktop" ]; then
-                cp /opt/apps/$PACK_NAME/entries/applications/${PACK_NAME}*.desktop /home/${USER}/$desktop
+                cp /opt/apps/$PACK_NAME/entries/applications/$PACK_NAME*.desktop /home/${USER}/$desktop
             fi
         fi
     done
@@ -46,7 +46,7 @@ if [ -n "$ACTIVEX_NAME" ]; then
     if [ ! -d "/usr/lib/mozilla/plugins" ];then
         mkdir -p /usr/lib/mozilla/plugins
     fi
-    cp /usr/local/share/pipelight/libpipelight.so /usr/lib/mozilla/plugins/libpipelight-${ACTIVEX_NAME}.so
+    cp /usr/local/share/pipelight/libpipelight.so /usr/lib/mozilla/plugins/libpipelight-$ACTIVEX_NAME.so
 fi
 
 # Make sure the script returns 0
