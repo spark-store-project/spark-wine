@@ -1,8 +1,8 @@
 #!/bin/sh
 
-PACK_NAME=""
-BOTTLE_NAME=""
-MIME_TYPE=""
+PACK_NAME="" #软体套件名
+BOTTLE_NAME="" #容器名
+MIME_TYPE="" 
 ACTIVEX_NAME=""
 MAKE_AUTOSTART=""
 SEND_TO_DESKTOP=""
