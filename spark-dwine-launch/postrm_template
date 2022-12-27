@@ -11,24 +11,26 @@ SEND_TO_DESKTOP="" #将启动图示从工作管理员copy至系统桌面，需�
 
 make_autostart()
 {
-    for file in $(ls /home)
+for username in $(ls /home)  
     do
-        if [ -d "/home/${USER}/.config/autostart" ]
+      echo /home/$username
+        if [ -d "/home/$username/.config/autostart" ]
         then
-            rm /home/${USER}/.config/autostart/$PACK_NAME.desktop
+            rm /home/$username/.config/autostart/$PACK_NAME.desktop
         fi
     done
 }
 
 send_to_desktop()
 {
-    for file in $(ls /home)
+ for username in $(ls /home)  
     do
-        if [ -d "/home/${USER}/.config/autostart" ]
+      echo /home/$username
+        if [ -d "/home/$username/.config/autostart" ]
         then
             desktop=$(cat /etc/xdg/user-dirs.defaults | grep DESKTOP | awk -F= '{print $2}')
-            if [ -d "/home/${USER}/$desktop" ]; then
-                rm /home/${USER}/$desktop/$PACK_NAME*.desktop
+            if [ -d "/home/$username/$desktop" ]; then
+                rm /home/$username/$desktop/$PACK_NAME*.desktop
             fi
         fi
     done
