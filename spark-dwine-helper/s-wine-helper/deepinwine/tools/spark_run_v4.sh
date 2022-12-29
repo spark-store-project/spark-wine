@@ -175,6 +175,7 @@ CallQQMusic()
        mv ${WINEPREFIX}/drive_c/Program\ Files/Tencent/QQMusic/*.dll ${WINEPREFIX}/drive_c/Program\ Files/Tencent/updatetemp
        mv ${WINEPREFIX}/drive_c/Program\ Files/Tencent/QQMusic/*.exe ${WINEPREFIX}/drive_c/Program\ Files/Tencent/updatetemp
        mv ${WINEPREFIX}/drive_c/Program\ Files/Tencent/QQMusic/*.rdb ${WINEPREFIX}/drive_c/Program\ Files/Tencent/updatetemp
+       mv ${WINEPREFIX}/drive_c/Program\ Files/Tencent/QQMusic/*.log ${WINEPREFIX}/drive_c/Program\ Files/Tencent/updatetemp
        mv ${WINEPREFIX}/drive_c/Program\ Files/Tencent/QQMusic/QQMusic* ${WINEPREFIX}/drive_c/Program\ Files/Tencent
        rm -rf ${WINEPREFIX}/drive_c/Program\ Files/Tencent/QQMusic
        rm -rf ${WINEPREFIX}/drive_c/Program\ Files/Tencent/updatetemp
