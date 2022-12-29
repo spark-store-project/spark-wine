@@ -178,6 +178,7 @@ CallQQMusic()
        mv ${WINEPREFIX}/drive_c/Program\ Files/Tencent/QQMusic/QQMusic* ${WINEPREFIX}/drive_c/Program\ Files/Tencent
        rm -rf ${WINEPREFIX}/drive_c/Program\ Files/Tencent/QQMusic
        rm -rf ${WINEPREFIX}/drive_c/Program\ Files/Tencent/updatetemp
+       rm -rf ${WINEPREFIX}/drive_c/Program\ Files/Tencent/*.log
        mv ${WINEPREFIX}/drive_c/Program\ Files/Tencent/QQMusic* ${WINEPREFIX}/drive_c/Program\ Files/Tencent/QQMusic
     fi
     CallProcess "$@"
