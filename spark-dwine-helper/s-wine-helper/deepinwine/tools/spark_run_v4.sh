@@ -170,6 +170,7 @@ CallQQMusic()
 {
     if [ -e ${WINEPREFIX}/drive_c/Program\ Files/Tencent/QQMusic/QQMusic.exe ]; then
     sleep 1
+    rm -rf ${WINEPREFIX}/drive_c/Program\ Files/Tencent/QQMusic/*.log
     else
        mkdir ${WINEPREFIX}/drive_c/Program\ Files/Tencent/updatetemp
        mv ${WINEPREFIX}/drive_c/Program\ Files/Tencent/QQMusic/*.dll ${WINEPREFIX}/drive_c/Program\ Files/Tencent/updatetemp
