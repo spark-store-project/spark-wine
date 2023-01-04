@@ -7,6 +7,8 @@ PACK_NAME=""   #软件包名
 ACTIVEX_NAME=""
 MAKE_AUTOSTART="" #如果先前设置了开机自启，则在此处填写1
 
+### 以下为功能段，若只用于打包则以下内容可不看，只填写上方变量即可
+
 make_autostart()
 {
 for username in $(ls /home)  
