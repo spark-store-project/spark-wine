@@ -2,12 +2,14 @@
 if [ "$1" = "remove" ] || [ "$1" = "purge" ];then
 
 echo "清理卸载残留"
-BOTTLE_NAME="" #容器名
-PACK_NAME=""   #软件包名
-ACTIVEX_NAME=""
+BOTTLE_NAME="" #在引号中填写容器名
+PACK_NAME=""   #在引号中填写软件包名
+ACTIVEX_NAME="" #activex相关，若未使用，可不设置
 MAKE_AUTOSTART="" #如果先前设置了开机自启，则在此处填写1
 
-### 以下为功能段，若只用于打包则以下内容可不看，只填写上方变量即可
+
+
+### 以下为功能段，若只用于打包则以下内容可不看，只填写上方即可
 
 make_autostart()
 {
