@@ -145,6 +145,7 @@ CallProcess()
     # Disable winemenubuilder
     env WINEPREFIX="$WINEPREFIX" $WINE_CMD reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v winemenubuilder.exe /f
     debug_log_to_file "Starting process $* ..."
+
 	#############  WARNING: Here is the modified content: Now will run set-dwine-scale.sh
 	/opt/durapps/spark-dwine-helper/scale-set-helper/set-wine-scale.sh "$WINEPREFIX"
     env WINEPREFIX="$WINEPREFIX" $WINE_CMD "$@" &
@@ -563,7 +564,7 @@ CallApp()
 ExtractApp()
 {
 	mkdir -p "$1"
-	7z x "$APPDIR/$APPTAR" -o"$1"
+	7z x "$APPDIR/$APPTAR" -o"$1" -bsp1 -bb1 -bse2 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" |   zenity --progress --title="$BOTTLENAME" --text="解包$BOTTLENAME中..."  --width=400 --auto-close --no-cancel
 	mv "$1/drive_c/users/@current_user@" "$1/drive_c/users/$USER"
 	sed -i "s#@current_user@#$USER#" $1/*.reg
     FixLink
@@ -623,9 +624,9 @@ RunApp()
         exit 0
     fi
  	if [ -d "$WINEPREFIX" ]; then
-        UpdateApp | progressbar "$BOTTLENAME" "更新$BOTTLENAME中..."
+        UpdateApp
  	else
-        DeployApp | progressbar $BOTTLENAME "初始化$BOTTLENAME中..."
+        DeployApp 
  	fi
 
     CallApp "$@"
@@ -657,23 +658,11 @@ ParseArgs()
 
 init_log_file
 
-# Check if some visual feedback is possible
-if command -v zenity >/dev/null 2>&1; then
-	progressbar()
-	{
-		WINDOWID="" zenity --progress --title="$1" --text="$2" --pulsate --width=400 --auto-close --no-cancel ||
-		WINDOWID="" zenity --progress --title="$1" --text="$2" --pulsate --width=400 --auto-close
-	}
-
-else
-	progressbar()
-	{
-		cat -
-	}
-fi
 
 
-#####准备启动进程，分析在 https://shenmo7192.gitee.io/post/deepin-wine6%E7%9A%84run_v4%E8%84%9A%E6%9C%AC%E6%8E%A2%E7%B4%A2%E5%90%AF%E5%8A%A8%E6%96%B9%E5%BC%8F/
+
+
+#####准备启动进程，分析在 https://blog.shenmo.tech/post/deepin-wine6%E7%9A%84run_v4%E8%84%9A%E6%9C%AC%E6%8E%A2%E7%B4%A2%E5%90%AF%E5%8A%A8%E6%96%B9%E5%BC%8F/
 if [ $# -lt 3 ]; then
     debug_log "参数个数小于3个"
     exit 0
