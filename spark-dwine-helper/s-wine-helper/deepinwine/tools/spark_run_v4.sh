@@ -160,6 +160,19 @@ CallProcess()
 ###有设置mimetype和自动启动(这个暂时没分析)的功能
 
 ###########专属优化段：
+CallSpark-MailMaster()
+{
+CallProcess "$@"
+sleep 2
+/opt/apps/com.163.dashi.mailmaster.spark/files/disable_mailmaster_shadows
+}
+
+CallSpark-CloudMusic()
+{
+CallProcess "$@"
+sleep 2
+/opt/apps/com.163.music.spark/files/disable_cloudmusic_shadows
+}
 
 CalleCloud()
 {
@@ -544,17 +557,23 @@ CallApp()
         "Spark-flyele")
             CallFlyele "$@"
             ;;
-	    "Spark-douyin")
+	 "Spark-douyin")
             CallDouyin "$@"
             ;;
-	    "Spark-ecloud")
+	 "Spark-ecloud")
             CalleCloud "$@"
             ;;
-	    "IE8")
+	 "IE8")
             CallIE8 "$@"
             ;;
-	    "Spark-QQMusic")
+	 "Spark-QQMusic")
             CallQQMusic "$@"
+            ;;
+	 "Spark-CloudMusic")
+            CallSpark-CloudMusic "$@" "$@"
+            ;;
+	 "Spark-MailMaster")
+            CallSpark-MailMaster "$@"
             ;;
         *)        
             CallProcess "$@"
