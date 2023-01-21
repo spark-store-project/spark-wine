@@ -79,7 +79,7 @@ fi
 
 ##############<<<<<<<<<屏蔽mono和gecko安装器开始
 ##默认屏蔽mono和gecko安装器
-if [ "$APPRUN_CMD" = "spark-wine7-devel" ] && [ -z "$ENABLE_DOT_NET"];then
+if [ "$APPRUN_CMD" = "spark-wine7-devel" ] && [ -z "$ENABLE_DOT_NET" ];then
 
 export WINEDLLOVERRIDES="mscoree,mshtml="
 #### "为了降低打包体积，默认关闭gecko和momo，如有需要，注释此行（仅对spark-wine7-devel有效）"
