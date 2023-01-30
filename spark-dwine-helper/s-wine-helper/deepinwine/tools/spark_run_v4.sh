@@ -587,7 +587,7 @@ CallApp()
 ExtractApp()
 {
 	mkdir -p "$1"
-	7z x "$APPDIR/$APPTAR" -o"$1" -bsp1 -bb1 -bse2 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" |   zenity --progress --title="$BOTTLENAME" --text="解包$BOTTLENAME中..."  --width=400 --auto-close --no-cancel
+	7z x "$APPDIR/$APPTAR" -o"$1" -bsp1 -bb1 -bse2 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" |   zenity --progress --title="$BOTTLENAME" --text="${TRANSHELL_CONTENT_UNPACKING} $BOTTLENAME..."  --width=400 --auto-close --no-cancel
 	mv "$1/drive_c/users/@current_user@" "$1/drive_c/users/$USER"
 	sed -i "s#@current_user@#$USER#" $1/*.reg
     FixLink
