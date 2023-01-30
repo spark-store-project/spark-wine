@@ -1,4 +1,7 @@
 #/bin/bash
+source /opt/durapps/transhell/transhell.sh
+load_transhell_debug
+
 #########>>>>>>>函数段
 Get_Dist_Name()
 {
@@ -55,8 +58,8 @@ dimensions=`xdpyinfo | grep dimensions | sed -r 's/^[^0-9]*([0-9]+x[0-9]+).*$/\1
 scale_factor=`zenity --list \
 	--width=700 \
 	--height=350 \
-       --title="您的分辨率是：$dimensions，请在以下选项中选择一个以运行应用" \
-       --column="缩放倍率" \
+       --title="${TRANSHELL_CONTENT_YOUR_DIMENSION_IS} $dimensions ${TRANSHELL_CONTENT_PLEASE_CHOOSE_ONE_BELOW}" \
+       --column="${TRANSHELL_CONTENT_OPTION}" \
        1.0 \
        1.25 \
 	1.5 \
@@ -65,11 +68,11 @@ scale_factor=`zenity --list \
 
 case "$scale_factor" in 
 	"")
-	zenity --info --text="默认为1倍缩放。您可以使用星火wine助手设置来重新设置" --width=500 --height=150
+	zenity --info --text="${TRANSHELL_CONTENT_1_SCALE_AS_DEFAULT}${TRANSHELL_CONTENT_YOU_CAN_USE_SPARK_WINE_HELPER_SETTINGS_TO_ADJUST}" --width=500 --height=150
 	scale_factor="1.0"
 	;;
 	*)
-zenity --info --text="缩放倍数为$scale_factor。已保存！您可以使用星火wine助手设置来重新设置" --width=500 --height=150
+zenity --info --text="${TRANSHELL_CONTENT_SCALE_IS} $scale_factor ${TRANSHELL_CONTENT_SAVED}！${TRANSHELL_CONTENT_YOU_CAN_USE_SPARK_WINE_HELPER_SETTINGS_TO_ADJUST}" --width=500 --height=150
 	;;
 esac
 echo "$scale_factor" > $HOME/.config/spark-wine/scale.txt

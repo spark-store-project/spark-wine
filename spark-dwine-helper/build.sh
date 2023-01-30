@@ -25,7 +25,7 @@ Version: $version
 Architecture: all
 Maintainer: shenmo <shenmo@spark-app.store>
 Installed-Size: $SIZE
-Depends: zenity:amd64, p7zip-full:amd64, fonts-noto-cjk,deepin-wine-helper(>=5.1)
+Depends: zenity:amd64, p7zip-full:amd64, fonts-noto-cjk,deepin-wine-helper(>=5.1),transhell
 Section: utils
 Priority: extra
 Recommends: spark-dwine-helper-settings
@@ -85,7 +85,7 @@ Version: $version
 Architecture: all
 Maintainer: shenmo <shenmo@spark-app.store>
 Installed-Size: $SIZE
-Depends: zenity:amd64, p7zip-full:amd64, fonts-noto-cjk,deepin-wine-helper(>=5.1)
+Depends: zenity:amd64, p7zip-full:amd64, fonts-noto-cjk,deepin-wine-helper(>=5.1),transhell
 Section: utils
 Priority: extra
 Recommends: spark-dwine-helper-settings
@@ -112,11 +112,11 @@ SIZE=`echo ${SIZE%%.*}`
 
 cat  << EOF >pkg/DEBIAN/control
 Package: spark-dwine-helper-settings
-Version: 1.2
+Version: 1.3
 Architecture: all
 Maintainer: shenmo <shenmo@spark-app.store>
 Installed-Size: $SIZE
-Depends: spark-dwine-helper(>=1.6)
+Depends: spark-dwine-helper(>=1.6),transhell
 Section: utils
 Priority: extra
 Multi-Arch: foreign

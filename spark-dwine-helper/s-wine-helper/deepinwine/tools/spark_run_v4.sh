@@ -9,6 +9,10 @@
 #   Modifier:   shenmo <shenmo@spark-app.store>
 #		   
 #
+
+source /opt/durapps/transhell/transhell.sh
+load_transhell_debug
+
 WINEPREFIX="$HOME/.deepinwine/@public_bottle_name@"
 APPDIR="/opt/deepinwine/apps/@public_bottle_name@"
 APPVER="@deb_version_string@"
