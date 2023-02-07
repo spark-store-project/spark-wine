@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Utility;
 Encoding=UTF-8
-Exec=sh -c "/opt/durapps/spark-dwine-helper/spark-dwine-helper-settings/settings.sh"
+Exec=bash -c "/opt/durapps/spark-dwine-helper/spark-dwine-helper-settings/settings.sh"
 Icon=spark-dwine-helper-settings
 MimeType=
 Name=Spark Wine Helper Settings
