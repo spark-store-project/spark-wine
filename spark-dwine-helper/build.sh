@@ -25,7 +25,7 @@ Version: $version
 Architecture: all
 Maintainer: shenmo <shenmo@spark-app.store>
 Installed-Size: $SIZE
-Depends: zenity:amd64, p7zip-full:amd64, fonts-noto-cjk,deepin-wine-helper(>=5.1),transhell
+Depends: zenity, p7zip-full, fonts-noto-cjk,deepin-wine-helper(>=5.1) | com.wine-helper.deepin,transhell
 Section: utils
 Priority: extra
 Recommends: spark-dwine-helper-settings
@@ -85,7 +85,7 @@ Version: $version
 Architecture: all
 Maintainer: shenmo <shenmo@spark-app.store>
 Installed-Size: $SIZE
-Depends: zenity:amd64, p7zip-full:amd64, fonts-noto-cjk,deepin-wine-helper(>=5.1),transhell
+Depends: zenity, p7zip-full, fonts-noto-cjk,deepin-wine-helper(>=5.1) | com.wine-helper.deepin,transhell
 Section: utils
 Priority: extra
 Recommends: spark-dwine-helper-settings
