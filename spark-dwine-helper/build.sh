@@ -25,10 +25,10 @@ Version: $version
 Architecture: all
 Maintainer: shenmo <shenmo@spark-app.store>
 Installed-Size: $SIZE
-Depends: zenity, p7zip-full, fonts-noto-cjk,deepin-wine-helper(>=5.1) | com.wine-helper.deepin,transhell
+Depends: zenity, p7zip-full, fonts-noto-cjk,transhell
 Section: utils
 Priority: extra
-Recommends: spark-dwine-helper-settings
+Recommends: spark-dwine-helper-settings,deepin-wine-helper(>=5.1) | com.wine-helper.deepin
 Multi-Arch: foreign
 Provides: store.spark-app.spark-dwine-helper(=$version)
 Replaces: store.spark-app.spark-dwine-helper(<=$version)
@@ -85,10 +85,10 @@ Version: $version
 Architecture: all
 Maintainer: shenmo <shenmo@spark-app.store>
 Installed-Size: $SIZE
-Depends: zenity, p7zip-full, fonts-noto-cjk,deepin-wine-helper(>=5.1) | com.wine-helper.deepin,transhell
+Depends: zenity, p7zip-full, fonts-noto-cjk,transhell
 Section: utils
 Priority: extra
-Recommends: spark-dwine-helper-settings
+Recommends: spark-dwine-helper-settings,deepin-wine-helper(>=5.1) | com.wine-helper.deepin
 Provides: spark-dwine-helper(=$version)
 Conflicts: spark-dwine-helper
 Replaces: spark-dwine-helper(<=$version)
