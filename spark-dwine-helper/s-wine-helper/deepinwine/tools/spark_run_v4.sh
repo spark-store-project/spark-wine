@@ -134,7 +134,7 @@ CallProcess()
     is_autostart $DEB_PACKAGE_NAME
     autostart=$?
     if [ $autostart -ne 0 ];then
-        $SHELL_DIR/kill.sh "$BOTTLENAME" block
+        $SHELL_DIR/kill_spark.sh "$BOTTLENAME" block
     fi
 
     #change current dir to excute path
@@ -254,7 +254,7 @@ CallZhuMu()
 CallQQGame()
 {
     debug_log "run $1"
-    $SHELL_DIR/kill.sh qqgame block
+    $SHELL_DIR/kill_spark.sh qqgame block
     env WINEPREFIX="$WINEPREFIX" $WINE_CMD "$1" &
 }
 
@@ -341,7 +341,7 @@ CallWXWork()
 CallDingTalk()
 {
     debug_log "run $1"
-    $SHELL_DIR/kill.sh DingTalk block
+    $SHELL_DIR/kill_spark.sh DingTalk block
 
     CallProcess "$@"
 }
@@ -404,7 +404,7 @@ CallFoxmail()
 
 CallTHS()
 {
-    $SHELL_DIR/kill.sh ths block
+    $SHELL_DIR/kill_spark.sh ths block
 
     debug_log "Start run $1"
     #get file full path
@@ -414,7 +414,7 @@ CallTHS()
 
     #kill bloack process
     name="${path##*/}"
-    $SHELL_DIR/kill.sh "$name" block
+    $SHELL_DIR/kill_spark.sh "$name" block
 
     #change current dir to excute path
     path=$(dirname "$path")
@@ -432,7 +432,7 @@ CallTHS()
 CallQQGameV2()
 {
     debug_log "run $1"
-    $SHELL_DIR/kill.sh QQMicroGameBox block
+    $SHELL_DIR/kill_spark.sh QQMicroGameBox block
     CallProcess "$1" -action:force_download -appid:${2} -pid:8 -bin_version:1.1.2.4 -loginuin: 
 }
 
@@ -447,7 +447,7 @@ CallPsCs6()
 
     #kill bloack process
     name="${path##*/}"
-    $SHELL_DIR/kill.sh "$name" block
+    $SHELL_DIR/kill_spark.sh "$name" block
 
     #change current dir to excute path
     path=$(dirname "$path")
