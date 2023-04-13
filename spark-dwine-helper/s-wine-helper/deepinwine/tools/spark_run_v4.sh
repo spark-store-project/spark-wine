@@ -632,7 +632,7 @@ UpdateApp()
     esac
 
 	ExtractApp "${WINEPREFIX}.tmpdir"
-	$SHELL_DIR/updater -s "${WINEPREFIX}.tmpdir" -c "${WINEPREFIX}" -v
+	$SHELL_DIR/spark_updater -s "${WINEPREFIX}.tmpdir" -c "${WINEPREFIX}" -v
 
 
 	rm -rf "${WINEPREFIX}.tmpdir"
