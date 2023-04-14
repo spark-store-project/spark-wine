@@ -215,7 +215,7 @@ kill_app()
 
 get_tray_window()
 {
-    $SHELL_DIR/get_tray_window | awk -F: '{print $2}'
+    $SHELL_DIR/spark_get_tray_window | awk -F: '{print $2}'
 }
 
 get_stacking_window()
