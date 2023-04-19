@@ -41,7 +41,7 @@ exit
 fi
 
 if [ -e /opt/deepinwine/tools/spark_kill.sh ];then
-/opt/deepinwine/tools/kill.sh $BOTTLE_NAME
+/opt/deepinwine/tools/spark_kill.sh $BOTTLE_NAME
 ###这里注意，如果没写BOTTLE_NAME,会把QQ杀了
 fi
 
