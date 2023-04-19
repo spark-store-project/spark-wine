@@ -40,7 +40,7 @@ echo "W: 没有指定容器，跳过清理容器。请手动前往 ~/.deepinwine
 exit
 fi
 
-if [ -e /opt/deepinwine/tools/kill.sh ];then
+if [ -e /opt/deepinwine/tools/spark_kill.sh ];then
 /opt/deepinwine/tools/kill.sh $BOTTLE_NAME
 ###这里注意，如果没写BOTTLE_NAME,会把QQ杀了
 fi
