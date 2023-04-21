@@ -149,7 +149,7 @@ CallProcess()
     # Disable winemenubuilder
     env WINEPREFIX="$WINEPREFIX" $WINE_CMD reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v winemenubuilder.exe /f
     # Link to Document
-    env WINEPREFIX="$WINEPREFIX" $WINE_CMD reg add 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' /t REG_EXPAND_SZ  /v Personal /d "%USERPROFILE%\Documents" /f
+    env WINEPREFIX="$WINEPREFIX" $WINE_CMD reg add 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' /t REG_EXPAND_SZ  /v Personal /d "%USERPROFILE%\My Documents" /f
     debug_log_to_file "Starting process $* ..."
 
 	#############  WARNING: Here is the modified content: Now will run set-dwine-scale.sh
