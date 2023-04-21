@@ -149,7 +149,7 @@ CallProcess()
     # Disable winemenubuilder
     env WINEPREFIX="$WINEPREFIX" $WINE_CMD reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v winemenubuilder.exe /f
     # Link to Document
-if [ -f "$WINEPREFIX/drive_c/users/$(logname)/My Documents" ]; then
+if [ -L "$WINEPREFIX/drive_c/users/$(logname)/My Documents" ]; then
         env WINEPREFIX="$WINEPREFIX" $WINE_CMD reg add 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' /t REG_EXPAND_SZ  /v Personal /d "%USERPROFILE%\My Documents" /f
 
 else
