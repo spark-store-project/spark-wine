@@ -164,7 +164,7 @@ fi
 
 	#############  WARNING: Here is the modified content: Now will run set-dwine-scale.sh
 	/opt/durapps/spark-dwine-helper/scale-set-helper/set-wine-scale.sh "$WINEPREFIX"
-    env WINEPREFIX="$WINEPREFIX" $WINE_CMD "$@" &
+    env WINEPREFIX="$WINEPREFIX" $WINE_CMD "$@"
 
     #start autobottle
     if [ $autostart -eq 0 ];then
