@@ -745,12 +745,6 @@ case $4 in
 	"-h" | "--help")
 		HelpApp
 		;;
-	"-ui")
-		Run RA3 in window
-		;;
-	"-win")
-		Run RA3 in window
-		;;
 	*)
 		echo "Invalid option: $4"
 		echo "Use -h|--help to get help"
