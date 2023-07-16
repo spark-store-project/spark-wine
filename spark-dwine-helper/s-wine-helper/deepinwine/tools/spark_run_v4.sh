@@ -525,7 +525,7 @@ CallApp()
         "Deepin-ATM")
             CallATM "$@"
             ;;
-        "Deepin-WeChat")
+        "Deepin-WeChat"|"Spark-WeixinTasting")
             CallWeChat "$@"
             ;;
         "Deepin-WXWork"|"Spark-WeCom"|"wxwork-spark-uk")
@@ -573,22 +573,22 @@ CallApp()
         "Spark-flyele")
             CallFlyele "$@"
             ;;
-	 "Spark-douyin")
+	    "Spark-douyin")
             CallDouyin "$@"
             ;;
-	 "Spark-ecloud")
+	    "Spark-ecloud")
             CalleCloud "$@"
             ;;
-	 "IE8")
+	    "IE8")
             CallIE8 "$@"
             ;;
-	 "Spark-QQMusic")
+	    "Spark-QQMusic")
             CallQQMusic "$@"
             ;;
-	 "Spark-CloudMusic")
+	    "Spark-CloudMusic")
             CallSpark-CloudMusic "$@" "$@"
             ;;
-	 "Spark-MailMaster")
+	    "Spark-MailMaster")
             CallSpark-MailMaster "$@"
             ;;
         *)        
