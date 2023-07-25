@@ -40,7 +40,7 @@ EXEC_PATH="启动路径"
 ##### 软件在wine中的启动路径
 START_SHELL_PATH="/opt/deepinwine/tools/spark_run_v4.sh"
 ENABLE_DOT_NET=""
-####若使用spark-wine7-devel时需要用到.net，则请把ENABLE_DOT_NET设为true，同时在依赖中写spark-wine7-mono
+####若使用spark-wine时需要用到.net，则请把ENABLE_DOT_NET设为true，同时在依赖中写spark-wine7-mono
 export MIME_TYPE=""
 
 export DEB_PACKAGE_NAME="包名"
