@@ -37,7 +37,20 @@ if [ $SPECIFY_SHELL_DIR ]; then
     SHELL_DIR=$SPECIFY_SHELL_DIR
 fi
 
+# Check if some visual feedback is possible
+if command -v zenity >/dev/null 2>&1; then
+	progressbar()
+	{
+		WINDOWID="" zenity --progress --title="$1" --text="$2" --pulsate --width=400 --auto-close --no-cancel ||
+		WINDOWID="" zenity --progress --title="$1" --text="$2" --pulsate --width=400 --auto-close
+	}
 
+else
+	progressbar()
+	{
+		cat -
+	}
+fi
 
 _DeleteRegistry()
 {
@@ -213,7 +226,8 @@ fi
 ExtractApp()
 {
 	mkdir -p "$1"
-	7z x "$APPDIR/$APPTAR" -o"$1" -bsp1 -bb1 -bse2 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" |   zenity --progress --title="$BOTTLENAME" --text="${TRANSHELL_CONTENT_UNPACKING} $BOTTLENAME..."  --width=400 --auto-close --no-cancel
+#	7z x "$APPDIR/$APPTAR" -o"$1" -bsp1 -bb1 -bse2 | grep --line-buffered -oP "(\d+(\.\d+)?(?=%))" |   zenity --progress --title="$BOTTLENAME" --text="${TRANSHELL_CONTENT_UNPACKING} $BOTTLENAME..."  --width=400 --auto-close --no-cancel 
+	7z x "$APPDIR/$APPTAR" -o"$1"
 	mv "$1/drive_c/users/@current_user@" "$1/drive_c/users/$USER"
 	sed -i "s#@current_user@#$USER#" $1/*.reg
     FixLink
@@ -273,9 +287,9 @@ RunApp()
         exit 0
     fi
  	if [ -d "$WINEPREFIX" ]; then
-        UpdateApp
+        UpdateApp | progressbar "$BOTTLENAME" "${TRANSHELL_CONTENT_UNPACKING} $BOTTLENAME..."
  	else
-        DeployApp 
+        DeployApp | progressbar "$BOTTLENAME" "${TRANSHELL_CONTENT_UNPACKING} $BOTTLENAME..."
  	fi
 
     CallApp "$@"
