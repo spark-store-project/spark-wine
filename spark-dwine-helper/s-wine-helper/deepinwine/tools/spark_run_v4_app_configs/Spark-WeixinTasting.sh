@@ -1,1 +1,0 @@
-Deepin-WeChat.sh
